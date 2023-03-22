@@ -4,7 +4,7 @@ This repository contains the accompanying material to the paper __Delta Modeling
 
 IEC~61499 is a standard for developing industrial distributed control software. It supports the configurability of the control software as the application model is platform-independent and separated from the hardware configuration specification. It is thus a good basis to develop control software for highly configurable Cyber-Physical Production Systems (CPPSs). Systematically managing the control software variability in CPPSs would help to increase reuse and reduce the cost of developing and/or maintaining CPPSs.
 
-In this paper, we propose an approach to systematically manage IEC~61499-based control software using a (textual) delta modeling approach.
+In this paper, we propose an approach to systematically manage IEC 61499-based control software using a (textual) delta modeling approach.
 The delta modeling approach is a prominent concept in the Software Product Line (SPL) domain for expressing and maintaining software variability.
 We show how our delta modeling approach can express control software variability and provide a semi-automatic control software generator. The results confirm that our delta modeling approach can be helpful for implementing and maintaining IEC~61499-based control software variability.
 
