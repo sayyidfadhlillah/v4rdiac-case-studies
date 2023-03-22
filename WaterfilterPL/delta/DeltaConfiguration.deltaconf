@@ -1,0 +1,88 @@
+productline WaterfilterPL;
+variations waterfilter_without_components_product#Charcoal,waterfilter_without_components_product#FreshwaterTankModule,waterfilter_without_components_product#Charcoal#CharcoalActive,waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankXLModule,waterfilter_without_components_product#Nanofilter#NanofilterHull,waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CBFilterTankXLModule,waterfilter_without_components_product#Mount#Rack2,waterfilter_without_components_product#FilterTank#FilterTankS,waterfilter_without_components_product#Mount#Rack1,waterfilter_without_components_product#Mount#IronFrame,waterfilter_without_components_product#Nanofilter#NanofilterMaterial,waterfilter_without_components_product#FibreMembrane,waterfilter_without_components_product#WastewaterTankXL,waterfilter_without_components_product#Tube#Tube2,waterfilter_without_components_product#FreshwaterTank,waterfilter_without_components_product#Tube#Tube1,waterfilter_without_components_product#Tube#Tube3,waterfilter_without_components_product#Charcoal#CharcoalBone,waterfilter_without_components_product#FilterTankModule#FilterTankSModule,waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CAFilterTankXLModule,waterfilter_without_components_product#Valve,waterfilter_without_components_product#Valve#Valve2,waterfilter_without_components_product#Valve#Valve1,waterfilter_without_components_product#FilterTank,waterfilter_without_components_product#FreshwaterTank#FreshwaterTankXL,waterfilter_without_components_product#FilterTankModule,waterfilter_without_components_product#FilterTank#FilterTankXL,waterfilter_without_components_product#Sand,waterfilter_without_components_product#Nanofilter,waterfilter_without_components_product#Mount,waterfilter_without_components_product#Tube,waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CAFilterTankSModule,waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule,waterfilter_without_components_product#WastewaterTankXLModule,waterfilter_without_components_product#FreshwaterTank#FreshwaterTankS,waterfilter_without_components_product,waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CBFilterTankSModule,waterfilter_without_components_product#FilterTankModule#FilterTankXLModule;
+
+delta DFillFilterTankSand when !waterfilter_without_components_product#Sand;
+
+delta DAssembleNanofilter when !waterfilter_without_components_product#Nanofilter;
+
+delta DAssembleWastewaterTankXLModule when !waterfilter_without_components_product#WastewaterTankXLModule;
+
+delta DWTXLRack2 when !(waterfilter_without_components_product#WastewaterTankXLModule && waterfilter_without_components_product#Mount#Rack2);
+
+delta DFillFilterTankXLModuleCA when !waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CAFilterTankXLModule;
+
+delta DFillFilterTankXLModuleCB when !waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CBFilterTankXLModule;
+
+delta DAssembleFreshwaterTankSModule when !waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule;
+
+delta DAssembleFreshwaterTankXLModule when !waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankXLModule;
+
+delta DANanofilterRack1 when !(waterfilter_without_components_product#Nanofilter && waterfilter_without_components_product#Mount#Rack1);
+
+delta DANanofilterRack2 when !(waterfilter_without_components_product#Nanofilter && waterfilter_without_components_product#Mount#Rack2);
+
+delta DFillFilterTankSModuleCB when !waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CBFilterTankSModule;
+
+delta DFillFilterTankSModuleCA when !waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CAFilterTankSModule;
+
+delta DFTSIronFrame when !(waterfilter_without_components_product#FilterTankModule#FilterTankSModule && waterfilter_without_components_product#Mount#IronFrame);
+
+delta DFTXLRack2 when !(waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankXLModule && waterfilter_without_components_product#Mount#Rack2);
+
+delta DFTSRack1 when !!(waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule && waterfilter_without_components_product#Mount#Rack1);
+
+delta DCBFTSModuleRack1 when !(waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CBFilterTankSModule && waterfilter_without_components_product#Mount#Rack1);
+
+delta DCAFTXLModuleRack2 when !(waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CAFilterTankXLModule && waterfilter_without_components_product#Mount#Rack2);
+
+delta DCAFTSModuleRack1 when !(waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CAFilterTankSModule && waterfilter_without_components_product#Mount#Rack1);
+
+delta DCAFTSIronFrame when !(waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CAFilterTankSModule && waterfilter_without_components_product#Mount#IronFrame);
+
+delta DCBFTXLModuleRack2 when !(waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CBFilterTankXLModule && waterfilter_without_components_product#Mount#Rack2);
+
+delta DCBFTSIronFrame when !(waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CBFilterTankSModule && waterfilter_without_components_product#Mount#IronFrame);
+
+delta DTank8 when !(waterfilter_without_components_product#Mount#Rack2
+				&& waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankXLModule 
+				&& waterfilter_without_components_product#WastewaterTankXLModule
+				&& waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CAFilterTankXLModule
+				&& waterfilter_without_components_product#Tube#Tube3
+				&& waterfilter_without_components_product#Nanofilter);
+
+delta DTank7 when !(waterfilter_without_components_product#Mount#Rack2
+				&& waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankXLModule 
+				&& waterfilter_without_components_product#WastewaterTankXLModule
+				&& waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CBFilterTankXLModule
+				&& waterfilter_without_components_product#Tube#Tube3
+				&& waterfilter_without_components_product#Nanofilter);
+
+delta DTank6 when !(waterfilter_without_components_product#Tube#Tube3
+				&& waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CAFilterTankXLModule
+				&& waterfilter_without_components_product#WastewaterTankXLModule
+				&& waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule 
+				&& waterfilter_without_components_product#Mount#Rack2);
+
+delta DTank5 when (waterfilter_without_components_product#Tube#Tube3
+				&& waterfilter_without_components_product#FilterTankModule#FilterTankXLModule#CBFilterTankXLModule
+				&& waterfilter_without_components_product#WastewaterTankXLModule
+				&& waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule 
+				&& waterfilter_without_components_product#Mount#Rack2);
+
+delta DTank4 when !(waterfilter_without_components_product#Nanofilter
+				&& waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CAFilterTankSModule
+				&& waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule 
+				&& waterfilter_without_components_product#Mount#Rack1);
+
+delta DTank3 when !(waterfilter_without_components_product#Nanofilter
+				&& waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CBFilterTankSModule
+				&& waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule 
+				&& waterfilter_without_components_product#Mount#Rack1);
+
+delta DTank2 when !(waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CAFilterTankSModule
+				&& waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule 
+				&& waterfilter_without_components_product#Mount#IronFrame);
+
+delta DTank1 when !(waterfilter_without_components_product#FilterTankModule#FilterTankSModule#CBFilterTankSModule
+				&& waterfilter_without_components_product#FreshwaterTankModule#FreshwaterTankSModule 
+				&& waterfilter_without_components_product#Mount#IronFrame);

@@ -1,0 +1,21 @@
+productline RockerswitchPL;
+variations rockerswitch_product,rockerswitch_product#Series,rockerswitch_product#Socket,rockerswitch_product#Rocker,rockerswitch_product#Screw,rockerswitch_product#O_Ring#O_Ring1_1,rockerswitch_product#O_Ring#O_Ring1_2,rockerswitch_product#Claw#Claw1_2,rockerswitch_product#Neutral,rockerswitch_product#Crossover,rockerswitch_product#Claw#Claw1_1,rockerswitch_product#Claw,rockerswitch_product#Changeover,rockerswitch_product#O_Ring,rockerswitch_product#Screw#Screw1_2,rockerswitch_product#Pole#Pole1_1,rockerswitch_product#Screw#Screw1_1,rockerswitch_product#Off#Off1_4,rockerswitch_product#Pole#Pole1_2,rockerswitch_product#Pole#Pole2_1,rockerswitch_product#Pole#Pole2_2,rockerswitch_product#Off#Off1_2,rockerswitch_product#Off#Off1_3,rockerswitch_product#Off#Off1_1,rockerswitch_product#Neutral#Neutral1_1,rockerswitch_product#Neutral#Neutral1_2,rockerswitch_product#Rocker#Rocker2_2,rockerswitch_product#Rocker#Rocker1_2,rockerswitch_product#Rocker#Rocker2_1,rockerswitch_product#Rocker#Rocker1_1,rockerswitch_product#Changeover#Changeover1,rockerswitch_product#Changeover#Changeover2,rockerswitch_product#Off,rockerswitch_product#Pole;
+
+delta DNetural1_1 when !rockerswitch_product#Neutral#Neutral1_1;
+delta DNetural1_2 when !rockerswitch_product#Neutral#Neutral1_2;
+delta DRocker1_1 when !rockerswitch_product#Rocker#Rocker1_1;
+delta DRocker1_2 when !rockerswitch_product#Rocker#Rocker1_2;
+delta DRocker2_1 when !rockerswitch_product#Rocker#Rocker2_1;
+delta DRocker2_2 when !rockerswitch_product#Rocker#Rocker2_2;
+delta DOff1_1 when !rockerswitch_product#Off#Off1_1;
+delta DOff1_2 when !rockerswitch_product#Off#Off1_2;
+delta DOff1_3 when !rockerswitch_product#Off#Off1_3;
+delta DOff1_4 when !rockerswitch_product#Off#Off1_4;
+delta DChangeover1 when !rockerswitch_product#Changeover#Changeover1;
+delta DChangeover2 when !rockerswitch_product#Changeover#Changeover2;
+delta DPole1_1 when !rockerswitch_product#Pole#Pole1_1;
+delta DPole1_2 when !rockerswitch_product#Pole#Pole1_2;
+delta DPole2_1 when !rockerswitch_product#Pole#Pole2_1;
+delta DPole2_2 when !rockerswitch_product#Pole#Pole2_2;
+delta DSeries when !rockerswitch_product#Series;
+delta DCrossover when !rockerswitch_product#Crossover;

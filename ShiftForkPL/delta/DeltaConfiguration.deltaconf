@@ -1,0 +1,16 @@
+productline ShiftForkPL;
+variations shiftfork_variability_product#Lock#Lock3,shiftfork_variability_product#Fork#Fork5,shiftfork_variability_product#Lock#Lock1,shiftfork_variability_product#Lock#Lock2,shiftfork_variability_product#Barrel#Barrel1_2,shiftfork_variability_product#Barrel#Barrel1_1,shiftfork_variability_product#Ring1,shiftfork_variability_product#Fork#Fork3,shiftfork_variability_product#Fork#Fork4,shiftfork_variability_product#Fork,shiftfork_variability_product#Jack1,shiftfork_variability_product#O_Ring,shiftfork_variability_product#Screw,shiftfork_variability_product#Pipe#Pipe2,shiftfork_variability_product#Pipe#Pipe3,shiftfork_variability_product#Lock,shiftfork_variability_product#Pipe#Pipe8,shiftfork_variability_product,shiftfork_variability_product#Barrel,shiftfork_variability_product#Pipe;
+
+delta DLock1 when !shiftfork_variability_product#Lock#Lock1;
+
+delta DLock3 when !shiftfork_variability_product#Lock#Lock3;
+
+delta DLock2 when !shiftfork_variability_product#Lock#Lock2;
+
+delta DPipe2 when !shiftfork_variability_product#Pipe#Pipe2;
+
+delta DPipe3 when !shiftfork_variability_product#Pipe#Pipe3;
+
+delta DPipe8 when !shiftfork_variability_product#Pipe#Pipe8;
+
+delta DBarrel12 when !shiftfork_variability_product#Barrel#Barrel1_2;
