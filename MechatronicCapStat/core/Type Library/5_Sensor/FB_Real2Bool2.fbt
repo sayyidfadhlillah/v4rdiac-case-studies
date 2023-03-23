@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="FB_Real2Bool2" Comment="Basic FB with empty ECC">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-02-20">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="CNF_Real_Data" Type="Event" Comment="">
+				<With Var="Real_Data"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="CNF_Data_Home" Type="Event" Comment="IF Real Data is less than 1">
+				<With Var="Data_Home"/>
+			</Event>
+			<Event Name="CNF_Data_Work" Type="Event" Comment="If Real Data is more than 9">
+				<With Var="Data_Work"/>
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="Real_Data" Type="REAL" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="Data_Home" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="Data_Work" Type="BOOL" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="543.4782608695652" y="417.39130434782606">
+			</ECState>
+			<ECState Name="Decide_WorkOrHome" Comment="" x="3134.782608695652" y="1247.8260869565217">
+			</ECState>
+			<ECState Name="Stat_Home" Comment="" x="5078.260869565217" y="1021.7391304347825">
+				<ECAction Algorithm="ALG_Home" Output="CNF_Data_Home"/>
+				<ECAction Output="CNF_Data_Work"/>
+			</ECState>
+			<ECState Name="Stat_Work" Comment="" x="4839.130434782608" y="2452.173913043478">
+				<ECAction Algorithm="ALG_Work" Output="CNF_Data_Work"/>
+				<ECAction Output="CNF_Data_Home"/>
+			</ECState>
+			<ECState Name="State" Comment="" x="5252.173913043478" y="3073.9130434782605">
+				<ECAction Algorithm="ALG_Unknown" Output="CNF_Data_Home"/>
+				<ECAction Output="CNF_Data_Work"/>
+			</ECState>
+			<ECTransition Source="START" Destination="Decide_WorkOrHome" Condition="CNF_Real_Data" Comment="" x="1956.5217391304348" y="900.0"/>
+			<ECTransition Source="Decide_WorkOrHome" Destination="Stat_Home" Condition="[Real_Data&lt;1]" Comment="" x="4495.652173913043" y="1273.9130434782608"/>
+			<ECTransition Source="Decide_WorkOrHome" Destination="Stat_Work" Condition="[Real_Data&gt;9]" Comment="" x="4660.869565217391" y="1839.1304347826085"/>
+			<ECTransition Source="Stat_Home" Destination="START" Condition="1" Comment="" x="3026.086956521739" y="639.1304347826086"/>
+			<ECTransition Source="Stat_Work" Destination="START" Condition="1" Comment="" x="2469.565217391304" y="1852.1739130434783"/>
+			<ECTransition Source="Decide_WorkOrHome" Destination="State" Condition="[Real_Data&gt;1 &amp; Real_Data&lt;9]" Comment="" x="3930.4347826086955" y="2382.608695652174"/>
+			<ECTransition Source="State" Destination="START" Condition="1" Comment="" x="2295.6521739130435" y="2421.7391304347825"/>
+		</ECC>
+		<Algorithm Name="ALG_Work" Comment="">
+			<ST><![CDATA[Data_Work:=TRUE;
+Data_Home:=FALSE;]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Home" Comment="">
+			<ST><![CDATA[Data_Home:=TRUE;
+Data_Work:=FALSE;]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Unknown" Comment="">
+			<ST><![CDATA[Data_Home:=FALSE;
+Data_Work:=FALSE;]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>

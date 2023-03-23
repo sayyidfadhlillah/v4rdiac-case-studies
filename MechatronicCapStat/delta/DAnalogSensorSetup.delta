@@ -1,0 +1,19 @@
+delta DAnalogSensorSetup;
+uses ETFA2023App.Hardware_Move_X.Sensor.Sensor_Analog;
+
+{
+	<Add> FB name=OPC_SUB_1_FixID_INT type=OPC_SUB_1_FixID_INT;
+	<Add> FB name=REAL2REAL type=REAL2REAL;
+	
+	<Add> EventConnection source=INIT dest=OPC_SUB_1_FixID_INT.INIT;
+	<Add> EventConnection source=OPC_SUB_1_FixID_INT.INITO dest=INITO;
+	<Add> EventConnection source=OPC_SUB_1_FixID_INT.IND dest=REAL2REAL.REQ;
+	<Add> DataConnection source=OPC_SUB_1_FixID_INT.value dest=REAL2REAL.IN;
+	
+	<Add> EventConnection source=REAL2REAL.CNF dest=CNF_Sensor_REAL;
+	<Add> DataConnection source=REAL2REAL.OUT dest=Data_REAL;
+	
+	<Modify> Variable name=OPC_SUB_1_FixID_INT.QI value=1;
+	<Modify> Variable name=OPC_SUB_1_FixID_INT.prefix value="FIO_I_";
+	<Modify> Variable name=OPC_SUB_1_FixID_INT.var1 value="Move_X_Sensor";
+}

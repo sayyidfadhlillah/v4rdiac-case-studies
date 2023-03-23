@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SubAppType Name="OPC_SUB_1_FixID_INT" Comment="Subapplication Type">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="Maximilian Scharf" Date="2022-03-09">
+	</VersionInfo>
+	<SubAppInterfaceList>
+		<SubAppEventInputs>
+			<SubAppEvent Name="INIT" Type="Event" Comment="">
+			</SubAppEvent>
+			<SubAppEvent Name="RSP" Type="Event" Comment="">
+			</SubAppEvent>
+		</SubAppEventInputs>
+		<SubAppEventOutputs>
+			<SubAppEvent Name="INITO" Type="Event" Comment="">
+			</SubAppEvent>
+			<SubAppEvent Name="IND" Type="Event" Comment="">
+			</SubAppEvent>
+		</SubAppEventOutputs>
+		<InputVars>
+			<VarDeclaration Name="QI" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="prefix" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="var1" Type="WSTRING" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="QO" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="STATUS" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="value" Type="INT" Comment=""/>
+		</OutputVars>
+	</SubAppInterfaceList>
+	<SubAppNetwork>
+		<FB Name="opc_call_begin" Type="WSTRING2WSTRING" Comment="" x="0.0" y="1333.3333333333335">
+			<Parameter Name="IN" Value="&quot;opc_ua[READ;/Objects/&quot;"/>
+		</FB>
+		<FB Name="F_STRING_TO_WSTRING" Type="F_STRING_TO_WSTRING" Comment="" x="9466.666666666668" y="1333.3333333333335">
+		</FB>
+		<FB Name="string_manipulation" Type="APPEND_STRING_3" Comment="" x="7866.666666666667" y="1333.3333333333335">
+		</FB>
+		<FB Name="opc_call_end" Type="WSTRING2WSTRING" Comment="" x="0.0" y="4666.666666666667">
+			<Parameter Name="IN" Value="&quot;]&quot;"/>
+		</FB>
+		<FB Name="var1" Type="WSTRING2WSTRING" Comment="" x="0.0" y="2666.666666666667">
+		</FB>
+		<FB Name="SUBSCRIBE_1" Type="SUBSCRIBE_1" Comment="" x="11200.0" y="533.3333333333334">
+		</FB>
+		<FB Name="prefix" Type="WSTRING2WSTRING" Comment="" x="0.0" y="2000.0">
+			<Parameter Name="IN" Value="&quot;FIO_I_&quot;"/>
+		</FB>
+		<FB Name="NopeID" Type="WSTRING2WSTRING" Comment="" x="0.0" y="3333.3333333333335">
+			<Parameter Name="IN" Value="&quot;, 1:s=&quot;"/>
+		</FB>
+		<FB Name="append_NodeId" Type="APPEND_STRING_2" Comment="" x="4000.0" y="2933.3333333333335">
+		</FB>
+		<FB Name="append_prefix" Type="APPEND_STRING_3" Comment="" x="5333.333333333334" y="2000.0">
+		</FB>
+		<EventConnections>
+			<Connection Source="string_manipulation.CNF" Destination="F_STRING_TO_WSTRING.REQ" Comment=""/>
+			<Connection Source="opc_call_end.CNF" Destination="string_manipulation.REQ" Comment="" dx1="6200.0"/>
+			<Connection Source="INIT" Destination="opc_call_begin.REQ" Comment="" dx1="486.6666666666667"/>
+			<Connection Source="F_STRING_TO_WSTRING.CNF" Destination="SUBSCRIBE_1.INIT" Comment="" dx1="300.0"/>
+			<Connection Source="SUBSCRIBE_1.INITO" Destination="INITO" Comment="" dx1="113.33333333333334"/>
+			<Connection Source="RSP" Destination="SUBSCRIBE_1.RSP" Comment="" dx1="4100.0"/>
+			<Connection Source="SUBSCRIBE_1.IND" Destination="IND" Comment="" dx1="253.33333333333334"/>
+			<Connection Source="opc_call_begin.CNF" Destination="prefix.REQ" Comment="" dx1="80.0" dx2="80.0" dy="333.33333333333337"/>
+			<Connection Source="prefix.CNF" Destination="var1.REQ" Comment="" dx1="80.0" dx2="80.0" dy="333.33333333333337"/>
+			<Connection Source="var1.CNF" Destination="NopeID.REQ" Comment="" dx1="80.0" dx2="80.0" dy="446.6666666666667"/>
+			<Connection Source="append_NodeId.CNF" Destination="append_prefix.REQ" Comment="" dx1="73.33333333333334"/>
+			<Connection Source="append_prefix.CNF" Destination="opc_call_end.REQ" Comment="" dx1="80.0" dx2="80.0" dy="2346.666666666667"/>
+			<Connection Source="NopeID.CNF" Destination="append_NodeId.REQ" Comment="" dx1="840.0"/>
+		</EventConnections>
+		<DataConnections>
+			<Connection Source="opc_call_begin.OUT" Destination="string_manipulation.IN_1" Comment=""/>
+			<Connection Source="string_manipulation.OUT" Destination="F_STRING_TO_WSTRING.IN" Comment=""/>
+			<Connection Source="opc_call_end.OUT" Destination="string_manipulation.IN_3" Comment="" dx1="6413.333333333334"/>
+			<Connection Source="var1" Destination="var1.IN" Comment="" dx1="646.6666666666667"/>
+			<Connection Source="F_STRING_TO_WSTRING.OUT" Destination="SUBSCRIBE_1.ID" Comment="" dx1="353.33333333333337"/>
+			<Connection Source="SUBSCRIBE_1.QO" Destination="QO" Comment="" dx1="380.0"/>
+			<Connection Source="SUBSCRIBE_1.STATUS" Destination="STATUS" Comment="" dx1="466.6666666666667"/>
+			<Connection Source="SUBSCRIBE_1.RD_1" Destination="value" Comment="" dx1="520.0"/>
+			<Connection Source="QI" Destination="SUBSCRIBE_1.QI" Comment="" dx1="4006.666666666667"/>
+			<Connection Source="prefix" Destination="prefix.IN" Comment="" dx1="786.6666666666667"/>
+			<Connection Source="prefix.OUT" Destination="append_prefix.IN_1" Comment=""/>
+			<Connection Source="append_prefix.OUT" Destination="string_manipulation.IN_2" Comment="" dx1="766.6666666666667"/>
+			<Connection Source="var1.OUT" Destination="append_prefix.IN_2" Comment="" dx1="2166.666666666667"/>
+			<Connection Source="append_NodeId.OUT" Destination="append_prefix.IN_3" Comment="" dx1="166.66666666666669"/>
+			<Connection Source="var1.OUT" Destination="append_NodeId.IN_2" Comment="" dx1="2186.666666666667"/>
+			<Connection Source="NopeID.OUT" Destination="append_NodeId.IN_1" Comment="" dx1="2760.0"/>
+		</DataConnections>
+	</SubAppNetwork>
+</SubAppType>

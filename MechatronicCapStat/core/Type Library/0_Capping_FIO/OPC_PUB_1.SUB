@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SubAppType Name="OPC_PUB_1" Comment="Subapplication Type">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="Maximilian Scharf" Date="2022-03-09">
+	</VersionInfo>
+	<SubAppInterfaceList>
+		<SubAppEventInputs>
+			<SubAppEvent Name="INIT" Type="Event" Comment="">
+			</SubAppEvent>
+			<SubAppEvent Name="REQ" Type="Event" Comment="">
+			</SubAppEvent>
+		</SubAppEventInputs>
+		<SubAppEventOutputs>
+			<SubAppEvent Name="INITO" Type="Event" Comment="">
+			</SubAppEvent>
+			<SubAppEvent Name="CNF" Type="Event" Comment="">
+			</SubAppEvent>
+		</SubAppEventOutputs>
+		<InputVars>
+			<VarDeclaration Name="QI" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="prefix" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="var1" Type="WSTRING" Comment="" InitialValue="STRING#'a'"/>
+			<VarDeclaration Name="value" Type="ANY" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="QO" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="STATUS" Type="WSTRING" Comment=""/>
+		</OutputVars>
+	</SubAppInterfaceList>
+	<SubAppNetwork>
+		<FB Name="WSTRING2WSTRING" Type="WSTRING2WSTRING" Comment="" x="133.33333333333334" y="1333.3333333333335">
+			<Parameter Name="IN" Value="&quot;opc_ua[WRITE;/Objects/&quot;"/>
+		</FB>
+		<FB Name="F_STRING_TO_WSTRING" Type="F_STRING_TO_WSTRING" Comment="" x="6533.333333333334" y="1333.3333333333335">
+		</FB>
+		<FB Name="APPEND_STRING_3" Type="APPEND_STRING_3" Comment="" x="5333.333333333334" y="1333.3333333333335">
+		</FB>
+		<FB Name="end" Type="WSTRING2WSTRING" Comment="" x="133.33333333333334" y="3333.3333333333335">
+			<Parameter Name="IN" Value="&quot;]&quot;"/>
+		</FB>
+		<FB Name="PUBLISH_1" Type="PUBLISH_1" Comment="" x="8066.666666666667" y="533.3333333333334">
+		</FB>
+		<FB Name="var1" Type="WSTRING2WSTRING" Comment="" x="133.33333333333334" y="2666.666666666667">
+		</FB>
+		<FB Name="prefix" Type="WSTRING2WSTRING" Comment="" x="133.33333333333334" y="2000.0">
+			<Parameter Name="IN" Value="&quot;FIO_Q_&quot;"/>
+		</FB>
+		<FB Name="append_prefix" Type="APPEND_STRING_2" Comment="" x="2666.666666666667" y="2000.0">
+		</FB>
+		<EventConnections>
+			<Connection Source="APPEND_STRING_3.CNF" Destination="F_STRING_TO_WSTRING.REQ" Comment=""/>
+			<Connection Source="F_STRING_TO_WSTRING.CNF" Destination="PUBLISH_1.INIT" Comment="" dx1="273.33333333333337"/>
+			<Connection Source="REQ" Destination="PUBLISH_1.REQ" Comment="" dx1="2766.666666666667"/>
+			<Connection Source="PUBLISH_1.INITO" Destination="INITO" Comment="" dx1="193.33333333333334"/>
+			<Connection Source="PUBLISH_1.CNF" Destination="CNF" Comment="" dx1="193.33333333333334"/>
+			<Connection Source="INIT" Destination="WSTRING2WSTRING.REQ" Comment="" dx1="486.6666666666667"/>
+			<Connection Source="WSTRING2WSTRING.CNF" Destination="prefix.REQ" Comment="" dx1="80.0" dx2="80.0" dy="333.33333333333337"/>
+			<Connection Source="prefix.CNF" Destination="var1.REQ" Comment="" dx1="80.0" dx2="80.0" dy="333.33333333333337"/>
+			<Connection Source="var1.CNF" Destination="append_prefix.REQ" Comment="" dx1="773.3333333333334"/>
+			<Connection Source="append_prefix.CNF" Destination="end.REQ" Comment="" dx1="80.0" dx2="80.0" dy="1073.3333333333335"/>
+			<Connection Source="end.CNF" Destination="APPEND_STRING_3.REQ" Comment="" dx1="3220.0"/>
+		</EventConnections>
+		<DataConnections>
+			<Connection Source="WSTRING2WSTRING.OUT" Destination="APPEND_STRING_3.IN_1" Comment=""/>
+			<Connection Source="APPEND_STRING_3.OUT" Destination="F_STRING_TO_WSTRING.IN" Comment=""/>
+			<Connection Source="F_STRING_TO_WSTRING.OUT" Destination="PUBLISH_1.ID" Comment="" dx1="353.33333333333337"/>
+			<Connection Source="end.OUT" Destination="APPEND_STRING_3.IN_3" Comment="" dx1="3600.0"/>
+			<Connection Source="value" Destination="PUBLISH_1.SD_1" Comment="" dx1="2566.666666666667"/>
+			<Connection Source="PUBLISH_1.QO" Destination="QO" Comment="" dx1="193.33333333333334"/>
+			<Connection Source="PUBLISH_1.STATUS" Destination="STATUS" Comment="" dx1="193.33333333333334"/>
+			<Connection Source="QI" Destination="PUBLISH_1.QI" Comment="" dx1="2666.666666666667"/>
+			<Connection Source="var1" Destination="var1.IN" Comment="" dx1="720.0"/>
+			<Connection Source="prefix" Destination="prefix.IN" Comment="" dx1="886.6666666666667"/>
+			<Connection Source="prefix.OUT" Destination="append_prefix.IN_1" Comment=""/>
+			<Connection Source="var1.OUT" Destination="append_prefix.IN_2" Comment="" dx1="773.3333333333334"/>
+			<Connection Source="append_prefix.OUT" Destination="APPEND_STRING_3.IN_2" Comment="" dx1="840.0"/>
+		</DataConnections>
+	</SubAppNetwork>
+</SubAppType>

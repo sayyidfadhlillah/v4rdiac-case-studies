@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="TimeOutMovement" Comment="Basic FB with empty ECC">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-03-16">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="Actuator_Request_Sent" Type="Event" Comment="">
+				<With Var="ExpectedResponseTime"/>
+			</Event>
+			<Event Name="CNF_Moved" Type="Event" Comment="">
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="Movement_OK" Type="Event" Comment="">
+			</Event>
+			<Event Name="Improper_Movement" Type="Event" Comment="">
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="ExpectedResponseTime" Type="TIME" Comment=""/>
+		</InputVars>
+		<Plugs>
+			<AdapterDeclaration Name="PLUG1" Type="ARTimeOut" Comment=""/>
+		</Plugs>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="546.6666666666667" y="420.0">
+			</ECState>
+			<ECState Name="State" Comment="" x="2453.3333333333335" y="840.0">
+				<ECAction Algorithm="ALG_Error" Output="PLUG1.START"/>
+			</ECState>
+			<ECState Name="State_1" Comment="" x="4360.0" y="2020.0">
+				<ECAction Output="PLUG1.STOP"/>
+				<ECAction Output="Improper_Movement"/>
+			</ECState>
+			<ECState Name="State_2" Comment="" x="2420.0" y="2233.3333333333335">
+				<ECAction Output="Movement_OK"/>
+			</ECState>
+			<ECTransition Source="START" Destination="State" Condition="Actuator_Request_Sent" Comment="" x="1733.3333333333335" y="693.3333333333334"/>
+			<ECTransition Source="State" Destination="State_1" Condition="PLUG1.TimeOut" Comment="" x="3513.3333333333335" y="1553.3333333333335"/>
+			<ECTransition Source="State_1" Destination="START" Condition="1" Comment="" x="3866.666666666667" y="406.6666666666667"/>
+			<ECTransition Source="State" Destination="State_2" Condition="CNF_Moved" Comment="" x="2626.666666666667" y="1506.6666666666667"/>
+			<ECTransition Source="State_2" Destination="START" Condition="1" Comment="" x="1606.6666666666667" y="1313.3333333333335"/>
+		</ECC>
+		<Algorithm Name="ALG_Error" Comment="">
+			<ST><![CDATA[Plug1.DT:=ExpectedResponseTime;]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>

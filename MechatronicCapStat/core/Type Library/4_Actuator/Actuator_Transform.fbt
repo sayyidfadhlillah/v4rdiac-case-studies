@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="Actuator_Transform" Comment="Basic FB with empty ECC">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-03-02">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="CNF_Move_Bool" Type="Event" Comment="">
+				<With Var="Data_Bool"/>
+				<With Var="Parameter_Home_INT"/>
+				<With Var="Parameter_Work_INT"/>
+			</Event>
+			<Event Name="CNF_INIT" Type="Event" Comment="">
+				<With Var="Parameter_INIT_INT"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="CNF_Move_INT" Type="Event" Comment="">
+				<With Var="Data_INT"/>
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="Data_Bool" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="Parameter_Home_INT" Type="INT" Comment=""/>
+			<VarDeclaration Name="Parameter_Work_INT" Type="INT" Comment=""/>
+			<VarDeclaration Name="Parameter_INIT_INT" Type="INT" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="Data_INT" Type="INT" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="543.4782608695652" y="417.39130434782606">
+			</ECState>
+			<ECState Name="Transform_To_Home" Comment="" x="3391.304347826087" y="543.4782608695652">
+				<ECAction Algorithm="ALG_Home_INT" Output="CNF_Move_INT"/>
+			</ECState>
+			<ECState Name="Transform_To_Work" Comment="" x="3291.304347826087" y="1291.304347826087">
+				<ECAction Algorithm="ALG_Work_INT" Output="CNF_Move_INT"/>
+			</ECState>
+			<ECState Name="Set_Initial" Comment="" x="3491.304347826087" y="2039.1304347826085">
+				<ECAction Algorithm="ALG_INIT" Output="CNF_Move_INT"/>
+			</ECState>
+			<ECTransition Source="START" Destination="Transform_To_Home" Condition="CNF_Move_Bool[Data_Bool=FALSE]" Comment="" x="2243.478260869565" y="569.5652173913044"/>
+			<ECTransition Source="START" Destination="Transform_To_Work" Condition="CNF_Move_Bool[Data_Bool=TRUE]" Comment="" x="2269.565217391304" y="1073.9130434782608"/>
+			<ECTransition Source="Transform_To_Work" Destination="START" Condition="1" Comment="" x="1730.4347826086955" y="1730.4347826086955"/>
+			<ECTransition Source="Transform_To_Home" Destination="START" Condition="1" Comment="" x="1982.6086956521738" y="226.08695652173913"/>
+			<ECTransition Source="START" Destination="Set_Initial" Condition="CNF_INIT" Comment="" x="1386.9565217391303" y="2413.0434782608695"/>
+			<ECTransition Source="Set_Initial" Destination="START" Condition="1" Comment="" x="1595.6521739130435" y="2021.7391304347825"/>
+		</ECC>
+		<Algorithm Name="ALG_Home_INT" Comment="">
+			<ST><![CDATA[Data_INT:=Parameter_Home_INT;]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Work_INT" Comment="">
+			<ST><![CDATA[Data_INT:=Parameter_Work_INT;]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_INIT" Comment="">
+			<ST><![CDATA[Data_INT:=Parameter_INIT_INT;]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>

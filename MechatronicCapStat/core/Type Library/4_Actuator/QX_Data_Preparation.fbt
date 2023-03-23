@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="QX_Data_Preparation" Comment="Basic FB with empty ECC">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-03-16">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="CNF_Actuator" Type="Event" Comment="">
+				<With Var="Data_Actuator"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="Actuator_Set_Reset" Type="Event" Comment="">
+				<With Var="Data_Coil_Home"/>
+				<With Var="Data_Coil_Work"/>
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="Data_Actuator" Type="BOOL" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="Data_Coil_Home" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="Data_Coil_Work" Type="BOOL" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="546.6666666666667" y="420.0">
+			</ECState>
+			<ECState Name="State" Comment="" x="4733.333333333334" y="713.3333333333334">
+				<ECAction Algorithm="ALG_Coil_Work" Output="Actuator_Set_Reset"/>
+			</ECState>
+			<ECState Name="Sets_Reset_Coils" Comment="" x="2606.666666666667" y="1353.3333333333335">
+			</ECState>
+			<ECState Name="State_2" Comment="" x="4760.0" y="1886.6666666666667">
+				<ECAction Algorithm="ALG_Coil_Home" Output="Actuator_Set_Reset"/>
+			</ECState>
+			<ECTransition Source="START" Destination="Sets_Reset_Coils" Condition="CNF_Actuator" Comment="" x="1646.6666666666667" y="906.6666666666667"/>
+			<ECTransition Source="Sets_Reset_Coils" Destination="State" Condition="[Data_Actuator=TRUE]" Comment="" x="3913.3333333333335" y="1046.6666666666667"/>
+			<ECTransition Source="Sets_Reset_Coils" Destination="State_2" Condition="[Data_Actuator=FALSE]" Comment="" x="3880.0" y="1720.0"/>
+			<ECTransition Source="State" Destination="START" Condition="1" Comment="" x="2853.3333333333335" y="626.6666666666667"/>
+			<ECTransition Source="State_2" Destination="START" Condition="1" Comment="" x="2580.0" y="2173.3333333333335"/>
+		</ECC>
+		<Algorithm Name="ALG_Coil_Work" Comment="">
+			<ST><![CDATA[Data_Coil_Work:=TRUE;
+Data_Coil_Home:=FALSE;]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Coil_Home" Comment="">
+			<ST><![CDATA[Data_Coil_Home:=TRUE;
+Data_Coil_Work:=FALSE;]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>

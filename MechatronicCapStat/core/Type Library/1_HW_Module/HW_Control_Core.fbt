@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="HW_Control_Core" Comment="Basic FB with empty ECC">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-03-02">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="REQ_Move" Type="Event" Comment="">
+				<With Var="Move_Destination"/>
+				<With Var="Sensor_Home"/>
+				<With Var="Sensor_Work"/>
+			</Event>
+			<Event Name="Sensor_Update" Type="Event" Comment="">
+				<With Var="Sensor_Home"/>
+				<With Var="Sensor_Work"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="REQ_Actuator" Type="Event" Comment="">
+				<With Var="Data_Actuator"/>
+			</Event>
+			<Event Name="Moved" Type="Event" Comment="">
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="Move_Destination" Type="STRING" Comment=""/>
+			<VarDeclaration Name="Sensor_Home" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="Sensor_Work" Type="BOOL" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="Data_Actuator" Type="BOOL" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="-3493.3333333333335" y="33.333333333333336">
+			</ECState>
+			<ECState Name="GoToHome" Comment="" x="-1540.0" y="2706.666666666667">
+				<ECAction Algorithm="ALG_Move_Position_Home" Output="REQ_Actuator"/>
+			</ECState>
+			<ECState Name="GoToWork" Comment="" x="-5233.333333333334" y="2800.0">
+				<ECAction Algorithm="ALG_Move_Position_Work" Output="REQ_Actuator"/>
+			</ECState>
+			<ECState Name="Home" Comment="" x="-5246.666666666667" y="1620.0">
+			</ECState>
+			<ECState Name="Work" Comment="" x="-1126.6666666666667" y="1646.6666666666667">
+			</ECState>
+			<ECState Name="Reached_Work" Comment="" x="-4946.666666666667" y="4380.0">
+				<ECAction Output="Moved"/>
+			</ECState>
+			<ECState Name="Reached_Home" Comment="" x="-2146.666666666667" y="4426.666666666667">
+				<ECAction Output="Moved"/>
+			</ECState>
+			<ECState Name="Repeat_Request_Home" Comment="" x="-6093.333333333334" y="1146.6666666666667">
+			</ECState>
+			<ECState Name="Repeat_Request_Work" Comment="" x="-680.0" y="1153.3333333333335">
+			</ECState>
+			<ECTransition Source="Home" Destination="GoToWork" Condition="REQ_Move[Move_Destination=&quot;Work&quot;]" Comment="" x="-5233.333333333334" y="2200.0"/>
+			<ECTransition Source="Work" Destination="GoToHome" Condition="REQ_Move[Move_Destination=&quot;Home&quot;]" Comment="" x="-460.0" y="2186.666666666667"/>
+			<ECTransition Source="GoToWork" Destination="Reached_Work" Condition="Sensor_Update[Sensor_Work=TRUE]" Comment="" x="-4740.0" y="3746.666666666667"/>
+			<ECTransition Source="GoToHome" Destination="Reached_Home" Condition="Sensor_Update[Sensor_Home=TRUE]" Comment="" x="-1506.6666666666667" y="3466.666666666667"/>
+			<ECTransition Source="Reached_Work" Destination="Work" Condition="1" Comment="" x="-1846.6666666666667" y="2280.0"/>
+			<ECTransition Source="Reached_Home" Destination="Home" Condition="1" Comment="" x="-3446.666666666667" y="2100.0"/>
+			<ECTransition Source="Home" Destination="Repeat_Request_Home" Condition="REQ_Move[Move_Destination=&quot;Home&quot;]" Comment="" x="-6300.0" y="1586.6666666666667"/>
+			<ECTransition Source="Work" Destination="Repeat_Request_Work" Condition="REQ_Move[Move_Destination=&quot;Work&quot;]" Comment="" x="293.33333333333337" y="1560.0"/>
+			<ECTransition Source="Repeat_Request_Home" Destination="Home" Condition="1" Comment="" x="-4853.333333333334" y="1353.3333333333335"/>
+			<ECTransition Source="Repeat_Request_Work" Destination="Work" Condition="1" Comment="" x="-1253.3333333333335" y="1500.0"/>
+			<ECTransition Source="START" Destination="GoToWork" Condition="REQ_Move[Move_Destination=&quot;Work&quot;]" Comment="" x="-3680.0" y="1340.0"/>
+			<ECTransition Source="START" Destination="GoToHome" Condition="REQ_Move[Move_Destination=&quot;Home&quot;]" Comment="" x="-2466.666666666667" y="1566.6666666666667"/>
+		</ECC>
+		<Algorithm Name="ALG_Move_Position_Home" Comment="Sets Data_Move FALSE for Event REQ_Move &quot;Home&quot;">
+			<ST><![CDATA[Data_Actuator:=FALSE;
+]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Move_Position_Work" Comment="Sets Data_Move TRUE for Event REQ_Move &quot;Work&quot;">
+			<ST><![CDATA[Data_Actuator:=TRUE;
+]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>

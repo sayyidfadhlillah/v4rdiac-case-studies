@@ -1,0 +1,10 @@
+delta DRemoveHSTransform;
+uses ETFA2023App.Hardware_Move_X.Sensor.Sensor_Transform;
+
+{
+	<Add> FB name=E_DELAY_Home_TRUE type=E_DELAY;
+	<Add> EventConnection source=Sensor_Work_Preperation.Sensor_Work_Falling_Edge dest=E_DELAY_Home_TRUE.START;
+	<Add> EventConnection source=E_DELAY_Home_TRUE.EO dest=Sensor_Merge_Home_And_Work.Sensor_Home_R;
+	<Modify> Variable name=E_DELAY_Home_TRUE.DT value=T#200ms;
+	<Remove> NetworkElement name=Sensor_Home_Preperation;
+}

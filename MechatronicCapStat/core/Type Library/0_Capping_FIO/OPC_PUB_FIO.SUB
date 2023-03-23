@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SubAppType Name="OPC_PUB_FIO" Comment="Subapplication Type">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="Maximilian Scharf" Date="2022-03-11">
+	</VersionInfo>
+	<SubAppInterfaceList>
+		<SubAppEventInputs>
+			<SubAppEvent Name="INIT" Type="Event" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="46"/>
+			</SubAppEvent>
+			<SubAppEvent Name="REQ" Type="Event" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+			</SubAppEvent>
+		</SubAppEventInputs>
+		<SubAppEventOutputs>
+			<SubAppEvent Name="INITO" Type="Event" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="46"/>
+			</SubAppEvent>
+			<SubAppEvent Name="CNF" Type="Event" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+			</SubAppEvent>
+		</SubAppEventOutputs>
+		<InputVars>
+			<VarDeclaration Name="QI" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="CameraPosition" Type="INT" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="49"/>
+			</VarDeclaration>
+			<VarDeclaration Name="Pause" Type="BOOL" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+			</VarDeclaration>
+			<VarDeclaration Name="Reset" Type="BOOL" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+			</VarDeclaration>
+			<VarDeclaration Name="Run" Type="BOOL" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+			</VarDeclaration>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="QO" Type="BOOL" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="18"/>
+			</VarDeclaration>
+			<VarDeclaration Name="STATUS" Type="WSTRING" Comment="">
+				<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+			</VarDeclaration>
+		</OutputVars>
+	</SubAppInterfaceList>
+	<SubAppNetwork>
+		<FB Name="PUBLISH_4" Type="PUBLISH_4" Comment="" x="2000.0" y="266.6666666666667">
+			<Parameter Name="ID" Value="&quot;opc_ua[WRITE;/Objects/FIO_Q_CameraPosition, 1:s=FIO_Q_CameraPosition;/Objects/FIO_Q_Pause, 1:s=FIO_Q_Pause;/Objects/FIO_Q_Reset, 1:s=FIO_Q_Reset;/Objects/FIO_Q_Run, 1:s=FIO_Q_Run]&quot;"/>
+		</FB>
+		<FB Name="CameraPosition" Type="INT2INT" Comment="" x="-666.6666666666667" y="666.6666666666667">
+		</FB>
+		<FB Name="Pause" Type="BOOL2BOOL" Comment="" x="-666.6666666666667" y="1200.0">
+		</FB>
+		<FB Name="Reset" Type="BOOL2BOOL" Comment="" x="-666.6666666666667" y="1733.3333333333335">
+		</FB>
+		<FB Name="Run" Type="BOOL2BOOL" Comment="" x="-666.6666666666667" y="2266.666666666667">
+		</FB>
+		<EventConnections>
+			<Connection Source="INIT" Destination="PUBLISH_4.INIT" Comment="" dx1="2300.0"/>
+			<Connection Source="REQ" Destination="PUBLISH_4.REQ" Comment="" dx1="2133.3333333333335"/>
+			<Connection Source="PUBLISH_4.INITO" Destination="INITO" Comment="" dx1="433.33333333333337"/>
+			<Connection Source="PUBLISH_4.CNF" Destination="CNF" Comment="" dx1="626.6666666666667"/>
+			<Connection Source="CameraPosition.CNF" Destination="PUBLISH_4.REQ" Comment="" dx1="846.6666666666667"/>
+			<Connection Source="REQ" Destination="CameraPosition.REQ" Comment="" dx1="346.6666666666667"/>
+			<Connection Source="REQ" Destination="Pause.REQ" Comment="" dx1="333.33333333333337"/>
+			<Connection Source="REQ" Destination="Reset.REQ" Comment="" dx1="333.33333333333337"/>
+			<Connection Source="REQ" Destination="Run.REQ" Comment="" dx1="333.33333333333337"/>
+			<Connection Source="Pause.CNF" Destination="PUBLISH_4.REQ" Comment="" dx1="773.3333333333334"/>
+			<Connection Source="Reset.CNF" Destination="PUBLISH_4.REQ" Comment="" dx1="773.3333333333334"/>
+			<Connection Source="Run.CNF" Destination="PUBLISH_4.REQ" Comment="" dx1="773.3333333333334"/>
+		</EventConnections>
+		<DataConnections>
+			<Connection Source="PUBLISH_4.QO" Destination="QO" Comment="" dx1="753.3333333333334"/>
+			<Connection Source="PUBLISH_4.STATUS" Destination="STATUS" Comment="" dx1="900.0"/>
+			<Connection Source="CameraPosition.OUT" Destination="PUBLISH_4.SD_1" Comment="" dx1="1026.6666666666667"/>
+			<Connection Source="CameraPosition" Destination="CameraPosition.IN" Comment="" dx1="346.6666666666667"/>
+			<Connection Source="Pause" Destination="Pause.IN" Comment="" dx1="333.33333333333337"/>
+			<Connection Source="Reset" Destination="Reset.IN" Comment="" dx1="333.33333333333337"/>
+			<Connection Source="Run" Destination="Run.IN" Comment="" dx1="333.33333333333337"/>
+			<Connection Source="Pause.OUT" Destination="PUBLISH_4.SD_2" Comment="" dx1="980.0"/>
+			<Connection Source="Reset.OUT" Destination="PUBLISH_4.SD_3" Comment="" dx1="980.0"/>
+			<Connection Source="Run.OUT" Destination="PUBLISH_4.SD_4" Comment="" dx1="980.0"/>
+			<Connection Source="QI" Destination="PUBLISH_4.QI" Comment="" dx1="1526.6666666666667"/>
+		</DataConnections>
+	</SubAppNetwork>
+</SubAppType>

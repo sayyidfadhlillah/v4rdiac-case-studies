@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="Error_Merge" Comment="Basic FB with empty ECC">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-03-17">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="Error_1" Type="Event" Comment="">
+			</Event>
+			<Event Name="Error_2" Type="Event" Comment="">
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="Error" Type="Event" Comment="">
+				<With Var="Error_Code"/>
+			</Event>
+		</EventOutputs>
+		<OutputVars>
+			<VarDeclaration Name="Error_Code" Type="INT" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="546.6666666666667" y="420.0">
+			</ECState>
+			<ECState Name="State" Comment="" x="2966.666666666667" y="686.6666666666667">
+				<ECAction Algorithm="ALG1" Output="Error"/>
+			</ECState>
+			<ECState Name="State_1" Comment="" x="2740.0" y="1873.3333333333335">
+				<ECAction Algorithm="ALG2" Output="Error"/>
+			</ECState>
+			<ECTransition Source="START" Destination="State" Condition="Error_1" Comment="" x="2173.3333333333335" y="1060.0"/>
+			<ECTransition Source="START" Destination="State_1" Condition="Error_2" Comment="" x="1713.3333333333335" y="1193.3333333333335"/>
+			<ECTransition Source="State" Destination="START" Condition="1" Comment="" x="1933.3333333333335" y="453.33333333333337"/>
+			<ECTransition Source="State_1" Destination="START" Condition="1" Comment="" x="1386.6666666666667" y="1480.0"/>
+		</ECC>
+		<Algorithm Name="ALG1" Comment="">
+			<ST><![CDATA[Error_Code:=1;]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG2" Comment="">
+			<ST><![CDATA[Error_Code:=2;]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>

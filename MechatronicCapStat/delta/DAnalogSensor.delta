@@ -1,0 +1,29 @@
+delta DAnalogSensor;
+uses ETFA2023App.Hardware_Move_X.Sensor;
+
+{	
+	<Create> Subapplication name=Sensor_Analog {
+		<Add> InterfaceElement Input name=INIT type=Event;
+		<Add> InterfaceElement Output name=INITO type=Event;
+		<Add> InterfaceElement Output name=CNF_Sensor_REAL type=Event;
+		<Add> InterfaceElement Output name=Data_REAL type=REAL;
+	}
+	
+	<Add> FB name=FB_Real2Bool2 type=FB_Real2Bool2;
+	<Add> FB name=RateSampler type=E_CYCLE;
+	
+	<Add> EventConnection source=INIT dest=Sensor_Analog.INIT;
+	<Add> EventConnection source=RateSampler.EO dest=FB_Real2Bool2.CNF_Real_Data;
+	<Add> EventConnection source=Sensor_Analog.INITO dest=INITO;
+	<Add> EventConnection source=Sensor_Analog.CNF_Sensor_REAL dest=RateSampler.START;
+	<Add> DataConnection source=Sensor_Analog.Data_REAL dest=FB_Real2Bool2.Real_Data;
+	
+	<Add> EventConnection source=FB_Real2Bool2.CNF_Data_Home dest=Sensor_Transform.CNF_Sensor_Home;
+	<Add> EventConnection source=FB_Real2Bool2.CNF_Data_Work dest=Sensor_Transform.CNF_Sensor_Work;
+	<Add> DataConnection source=FB_Real2Bool2.Data_Home dest=Sensor_Transform.Data_CNF_Sensor_Home;
+	<Add> DataConnection source=FB_Real2Bool2.Data_Work dest=Sensor_Transform.Data_CNF_Sensor_Work;
+	
+	<Remove> NetworkElement name=Sensor_Digital_Home;
+	<Remove> NetworkElement name=Sensor_Digital_Work;
+	
+}

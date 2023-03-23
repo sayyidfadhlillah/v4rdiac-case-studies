@@ -1,0 +1,7 @@
+delta DRemoveDigitalHome;
+uses ETFA2023App.Hardware_Move_X.Sensor;
+
+{
+	<Add> EventConnection source=INIT dest=Sensor_Digital_Work.INIT;
+	<Remove> NetworkElement name=Sensor_Digital_Home;
+}

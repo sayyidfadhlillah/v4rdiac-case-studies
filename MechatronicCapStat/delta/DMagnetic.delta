@@ -1,0 +1,7 @@
+delta DMagnetic;
+uses ETFA2023App;
+
+{
+	<Add> FB name=MagneticGripper type=Magnetic;
+	<Remove> NetworkElement name=VacuumGripper;
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<workflow>
+    <step description="" name="Functionality" num="0">
+        <fm name="model.xml" path="model.xml"/>
+    </step>
+</workflow>

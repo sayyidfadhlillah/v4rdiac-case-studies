@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SubAppType Name="OPC_SUB_FIO" Comment="Subapplication Type">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="Maximilian Scharf" Date="2022-03-11">
+	</VersionInfo>
+	<SubAppInterfaceList>
+		<SubAppEventInputs>
+			<SubAppEvent Name="INIT" Type="Event" Comment="">
+			</SubAppEvent>
+			<SubAppEvent Name="RSP" Type="Event" Comment="">
+			</SubAppEvent>
+		</SubAppEventInputs>
+		<SubAppEventOutputs>
+			<SubAppEvent Name="INITO" Type="Event" Comment="">
+			</SubAppEvent>
+			<SubAppEvent Name="IND" Type="Event" Comment="">
+			</SubAppEvent>
+		</SubAppEventOutputs>
+		<InputVars>
+			<VarDeclaration Name="QI" Type="BOOL" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="QO" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="STATUS" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="Paused" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="Reset" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="Running" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="TimeScale" Type="REAL" Comment=""/>
+		</OutputVars>
+	</SubAppInterfaceList>
+	<SubAppNetwork>
+		<FB Name="SUBSCRIBE_4" Type="SUBSCRIBE_4" Comment="" x="0.0" y="666.6666666666667">
+			<Parameter Name="ID" Value="&quot;opc_ua[READ;/Objects/FIO_I_Paused, 1:s=FIO_I_Paused;/Objects/FIO_I_Reset, 1:s=FIO_I_Reset;/Objects/FIO_I_Running, 1:s=FIO_I_Running;/Objects/FIO_I_TimeScale, 1:s=FIO_I_TimeScale]&quot;"/>
+		</FB>
+		<FB Name="BOOL2BOOL" Type="BOOL2BOOL" Comment="" x="2133.3333333333335" y="933.3333333333334">
+		</FB>
+		<FB Name="BOOL2BOOL_1" Type="BOOL2BOOL" Comment="" x="2133.3333333333335" y="1466.6666666666667">
+		</FB>
+		<FB Name="BOOL2BOOL_2" Type="BOOL2BOOL" Comment="" x="2133.3333333333335" y="2000.0">
+		</FB>
+		<FB Name="REAL2REAL" Type="REAL2REAL" Comment="" x="2133.3333333333335" y="2533.3333333333335">
+		</FB>
+		<EventConnections>
+			<Connection Source="INIT" Destination="SUBSCRIBE_4.INIT" Comment="" dx1="806.6666666666667"/>
+			<Connection Source="RSP" Destination="SUBSCRIBE_4.RSP" Comment="" dx1="653.3333333333334"/>
+			<Connection Source="SUBSCRIBE_4.INITO" Destination="INITO" Comment="" dx1="746.6666666666667"/>
+			<Connection Source="SUBSCRIBE_4.IND" Destination="BOOL2BOOL.REQ" Comment="" dx1="506.6666666666667"/>
+			<Connection Source="SUBSCRIBE_4.INITO" Destination="BOOL2BOOL.REQ" Comment="" dx1="753.3333333333334"/>
+			<Connection Source="SUBSCRIBE_4.INITO" Destination="BOOL2BOOL_1.REQ" Comment="" dx1="753.3333333333334"/>
+			<Connection Source="SUBSCRIBE_4.INITO" Destination="BOOL2BOOL_2.REQ" Comment="" dx1="753.3333333333334"/>
+			<Connection Source="SUBSCRIBE_4.INITO" Destination="REAL2REAL.REQ" Comment="" dx1="753.3333333333334"/>
+			<Connection Source="SUBSCRIBE_4.IND" Destination="BOOL2BOOL_1.REQ" Comment="" dx1="513.3333333333334"/>
+			<Connection Source="SUBSCRIBE_4.IND" Destination="BOOL2BOOL_2.REQ" Comment="" dx1="506.6666666666667"/>
+			<Connection Source="SUBSCRIBE_4.IND" Destination="REAL2REAL.REQ" Comment="" dx1="500.0"/>
+			<Connection Source="BOOL2BOOL.CNF" Destination="IND" Comment="" dx1="566.6666666666667"/>
+			<Connection Source="BOOL2BOOL_1.CNF" Destination="IND" Comment="" dx1="566.6666666666667"/>
+			<Connection Source="BOOL2BOOL_2.CNF" Destination="IND" Comment="" dx1="566.6666666666667"/>
+			<Connection Source="REAL2REAL.CNF" Destination="IND" Comment="" dx1="566.6666666666667"/>
+		</EventConnections>
+		<DataConnections>
+			<Connection Source="QI" Destination="SUBSCRIBE_4.QI" Comment="" dx1="546.6666666666667"/>
+			<Connection Source="SUBSCRIBE_4.QO" Destination="QO" Comment="" dx1="393.33333333333337"/>
+			<Connection Source="SUBSCRIBE_4.STATUS" Destination="STATUS" Comment="" dx1="1193.3333333333335"/>
+			<Connection Source="SUBSCRIBE_4.RD_1" Destination="BOOL2BOOL.IN" Comment="" dx1="666.6666666666667"/>
+			<Connection Source="BOOL2BOOL.OUT" Destination="Paused" Comment="" dx1="620.0"/>
+			<Connection Source="SUBSCRIBE_4.RD_2" Destination="BOOL2BOOL_1.IN" Comment="" dx1="386.6666666666667"/>
+			<Connection Source="BOOL2BOOL_1.OUT" Destination="Reset" Comment="" dx1="746.6666666666667"/>
+			<Connection Source="SUBSCRIBE_4.RD_3" Destination="BOOL2BOOL_2.IN" Comment="" dx1="260.0"/>
+			<Connection Source="BOOL2BOOL_2.OUT" Destination="Running" Comment="" dx1="886.6666666666667"/>
+			<Connection Source="REAL2REAL.OUT" Destination="TimeScale" Comment="" dx1="1006.6666666666667"/>
+			<Connection Source="SUBSCRIBE_4.RD_4" Destination="REAL2REAL.IN" Comment="" dx1="133.33333333333334"/>
+		</DataConnections>
+	</SubAppNetwork>
+</SubAppType>

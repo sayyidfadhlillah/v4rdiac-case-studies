@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="ETFA2023" Comment="">
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-03-17">
+	</VersionInfo>
+	<Application Name="ETFA2023App" Comment="">
+		<SubAppNetwork>
+			<SubApp Name="INIT_FIO" Comment="" x="3466.666666666667" y="-1333.3333333333335">
+				<SubAppInterfaceList>
+					<SubAppEventInputs>
+						<SubAppEvent Name="INIT" Type="Event" Comment="">
+						</SubAppEvent>
+					</SubAppEventInputs>
+					<SubAppEventOutputs>
+						<SubAppEvent Name="INITO" Type="Event" Comment="">
+						</SubAppEvent>
+					</SubAppEventOutputs>
+				</SubAppInterfaceList>
+				<SubAppNetwork>
+					<SubApp Name="SubApp_OPCUA_RUN_Pub_7" Comment="" x="-5406.666666666667" y="2326.666666666667">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="INIT" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="INITO" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventOutputs>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<FB Name="BOOL2BOOL_9" Type="BOOL2BOOL" Comment="" x="833.3333333333334" y="1533.3333333333335">
+							</FB>
+							<SubApp Name="OPC_PUB_1_FixID_Bool_1" Type="OPC_PUB_1_FixID_Bool" Comment="" x="2573.3333333333335" y="900.0">
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+								<Parameter Name="QI" Value="1"/>
+								<Parameter Name="prefix" Value="&quot;&quot;"/>
+								<Parameter Name="var1" Value="&quot;RUN&quot;"/>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<EventConnections>
+								<Connection Source="BOOL2BOOL_9.CNF" Destination="OPC_PUB_1_FixID_Bool_1.REQ" Comment="" dx1="560.0"/>
+								<Connection Source="INIT" Destination="OPC_PUB_1_FixID_Bool_1.INIT" Comment="" dx1="1713.3333333333335"/>
+								<Connection Source="OPC_PUB_1_FixID_Bool_1.INITO" Destination="INITO" Comment="" dx1="300.0" dx2="300.0" dy="0.0"/>
+							</EventConnections>
+							<DataConnections>
+								<Connection Source="BOOL2BOOL_9.OUT" Destination="OPC_PUB_1_FixID_Bool_1.value" Comment="" dx1="560.0"/>
+							</DataConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+						<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+					</SubApp>
+					<SubApp Name="FIO_1" Comment="" x="-5300.0" y="220.0">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="INIT" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="INITO" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventOutputs>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<FB Name="PUBLISH_4" Type="PUBLISH_4" Comment="" x="2800.0" y="2000.0">
+								<Parameter Name="QI" Value="1"/>
+								<Parameter Name="ID" Value="&quot;opc_ua[WRITE;/Objects/FIO_Q_CameraPosition, 1:s=FIO_Q_CameraPosition;/Objects/FIO_Q_Pause, 1:s=FIO_Q_Pause;/Objects/FIO_Q_Reset, 1:s=FIO_Q_Reset;/Objects/FIO_Q_Run, 1:s=FIO_Q_Run]&quot;"/>
+							</FB>
+							<SubApp Name="OPC_PUB_FIO_1" Type="OPC_PUB_FIO" Comment="" x="2400.0" y="960.0">
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<SubApp Name="OPC_SUB_FIO_1" Type="OPC_SUB_FIO" Comment="" x="0.0" y="1300.0">
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+								<Parameter Name="QI" Value="1"/>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<EventConnections>
+								<Connection Source="OPC_SUB_FIO_1.INITO" Destination="PUBLISH_4.INIT" Comment="" dx1="300.0" dx2="300.0" dy="0.0"/>
+								<Connection Source="OPC_SUB_FIO_1.INITO" Destination="OPC_PUB_FIO_1.INIT" Comment="" dx1="820.0"/>
+								<Connection Source="OPC_PUB_FIO_1.INITO" Destination="INITO" Comment="" dx1="540.0" dx2="540.0" dy="0.0"/>
+								<Connection Source="INIT" Destination="OPC_SUB_FIO_1.INIT" Comment="" dx1="700.0" dx2="700.0" dy="0.0"/>
+							</EventConnections>
+							<DataConnections>
+								<Connection Source="OPC_SUB_FIO_1.Paused" Destination="PUBLISH_4.SD_1" Comment="" dx1="200.0" dx2="200.0" dy="0.0"/>
+							</DataConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+						<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+					</SubApp>
+					<EventConnections>
+						<Connection Source="FIO_1.INITO" Destination="SubApp_OPCUA_RUN_Pub_7.INIT" Comment="" dx1="60.0" dx2="60.0" dy="1033.3333333333335"/>
+						<Connection Source="INIT" Destination="FIO_1.INIT" Comment="" dx1="233.33333333333334" dx2="233.33333333333334" dy="0.0"/>
+						<Connection Source="SubApp_OPCUA_RUN_Pub_7.INITO" Destination="INITO" Comment="" dx1="2726.666666666667"/>
+					</EventConnections>
+				</SubAppNetwork>
+				<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+				<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+			</SubApp>
+			<SubApp Name="Move_Request" Comment="" x="1580.0" y="-1053.3333333333335">
+				<SubAppInterfaceList>
+					<SubAppEventInputs>
+						<SubAppEvent Name="Work" Type="Event" Comment="">
+						</SubAppEvent>
+						<SubAppEvent Name="Home" Type="Event" Comment="">
+						</SubAppEvent>
+					</SubAppEventInputs>
+					<SubAppEventOutputs>
+						<SubAppEvent Name="REQ_Move" Type="Event" Comment="">
+						</SubAppEvent>
+					</SubAppEventOutputs>
+					<OutputVars>
+						<VarDeclaration Name="Move_Destination" Type="STRING" Comment=""/>
+					</OutputVars>
+				</SubAppInterfaceList>
+				<SubAppNetwork>
+					<FB Name="Work" Type="STRING2STRING" Comment="" x="773.3333333333334" y="120.0">
+						<Parameter Name="IN" Value="'Work'"/>
+					</FB>
+					<FB Name="Home" Type="STRING2STRING" Comment="" x="780.0" y="1006.6666666666667">
+						<Parameter Name="IN" Value="'Home'"/>
+					</FB>
+					<FB Name="Merge_Skill_Request" Type="Merge_Skill_Request" Comment="" x="3700.0" y="840.0">
+					</FB>
+					<SubApp Name="Intilize_Axis" Comment="" x="800.0" y="-933.3333333333334">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="REQ" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="Intialize_Work" Type="Event" Comment="Connect to Move_Work to intialize Work as start position else Connect to Move_Home to intialize Home as start position">
+								</SubAppEvent>
+								<SubAppEvent Name="Initialize_Home" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventOutputs>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<FB Name="Work_Home_Other" Type="STRING2STRING" Comment="Connect to Move_Work or Move_Home interface  of Instace Merge_Skill_Request" x="646.6666666666667" y="346.6666666666667">
+							</FB>
+							<EventConnections>
+								<Connection Source="REQ" Destination="Work_Home_Other.REQ" Comment="" dx1="760.0"/>
+								<Connection Source="Work_Home_Other.CNF" Destination="Intialize_Work" Comment="" dx1="553.3333333333334"/>
+								<Connection Source="Work_Home_Other.CNF" Destination="Initialize_Home" Comment="" dx1="553.3333333333334"/>
+							</EventConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+						<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+					</SubApp>
+					<EventConnections>
+						<Connection Source="Work" Destination="Work.REQ" Comment="" dx1="700.0"/>
+						<Connection Source="Home" Destination="Home.REQ" Comment="" dx1="600.0"/>
+						<Connection Source="Work.CNF" Destination="Merge_Skill_Request.Move_Work" Comment="" dx1="1106.6666666666667"/>
+						<Connection Source="Home.CNF" Destination="Merge_Skill_Request.Move_Home" Comment="" dx1="306.6666666666667"/>
+						<Connection Source="Merge_Skill_Request.HW_Request" Destination="REQ_Move" Comment="" dx1="200.0"/>
+					</EventConnections>
+					<DataConnections>
+						<Connection Source="Merge_Skill_Request.Requested_Data" Destination="Move_Destination" Comment="" dx1="626.6666666666667"/>
+					</DataConnections>
+				</SubAppNetwork>
+				<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+				<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+			</SubApp>
+			<SubApp Name="Hardware_Move_X" Comment="Hardware" x="6533.333333333334" y="-933.3333333333334">
+				<SubAppInterfaceList>
+					<SubAppEventInputs>
+						<SubAppEvent Name="INIT" Type="Event" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="20"/>
+						</SubAppEvent>
+						<SubAppEvent Name="REQ_Move" Type="Event" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="101"/>
+						</SubAppEvent>
+					</SubAppEventInputs>
+					<SubAppEventOutputs>
+						<SubAppEvent Name="Moved" Type="Event" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="151"/>
+						</SubAppEvent>
+						<SubAppEvent Name="Error" Type="Event" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="73"/>
+						</SubAppEvent>
+					</SubAppEventOutputs>
+					<InputVars>
+						<VarDeclaration Name="Move_Destination" Type="STRING" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="57"/>
+						</VarDeclaration>
+					</InputVars>
+					<OutputVars>
+						<VarDeclaration Name="Error_Code" Type="INT" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="57"/>
+						</VarDeclaration>
+					</OutputVars>
+				</SubAppInterfaceList>
+				<SubAppNetwork>
+					<SubApp Name="Actuator" Comment="" x="7200.0" y="2400.0">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="INIT" Type="Event" Comment="">
+								</SubAppEvent>
+								<SubAppEvent Name="CNF_Actuator" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="INITO" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventOutputs>
+							<InputVars>
+								<VarDeclaration Name="Data_Actuator" Type="BOOL" Comment=""/>
+							</InputVars>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<SubApp Name="Actuator_Move_X_Analog" Comment="" x="3220.0" y="1853.3333333333335">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="INIT" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="REQ" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="INITO" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="CNF" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+									<InputVars>
+										<VarDeclaration Name="Data_Int" Type="INT" Comment=""/>
+									</InputVars>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<FB Name="INT2INT" Type="INT2INT" Comment="" x="2660.0" y="3413.3333333333335">
+									</FB>
+									<SubApp Name="FIO_Move_X" Type="OPC_SUB_1_FixID_INT" Comment="" x="993.3333333333334" y="2646.666666666667">
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+										<Parameter Name="QI" Value="1"/>
+										<Parameter Name="prefix" Value="&quot;FIO_Q_&quot;"/>
+										<Parameter Name="var1" Value="&quot;Move_X_&quot;"/>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<SubApp Name="OPC_PUB_1" Type="OPC_PUB_1" Comment="" x="4373.333333333334" y="3246.666666666667">
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+										<Parameter Name="QI" Value="1"/>
+										<Parameter Name="prefix" Value="&quot;FIO_Q_&quot;"/>
+										<Parameter Name="var1" Value="&quot;Move_X_&quot;"/>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<EventConnections>
+										<Connection Source="INIT" Destination="FIO_Move_X.INIT" Comment="" dx1="1166.6666666666667"/>
+										<Connection Source="FIO_Move_X.IND" Destination="INT2INT.REQ" Comment="" dx1="233.33333333333334"/>
+										<Connection Source="FIO_Move_X.INITO" Destination="OPC_PUB_1.INIT" Comment="" dx1="1106.6666666666667" dx2="1106.6666666666667" dy="0.0"/>
+										<Connection Source="OPC_PUB_1.CNF" Destination="CNF" Comment="" dx1="626.6666666666667" dx2="626.6666666666667" dy="0.0"/>
+										<Connection Source="OPC_PUB_1.INITO" Destination="INITO" Comment="" dx1="460.0" dx2="460.0" dy="0.0"/>
+										<Connection Source="REQ" Destination="OPC_PUB_1.REQ" Comment="" dx1="2853.3333333333335"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="Data_Int" Destination="OPC_PUB_1.value" Comment="" dx1="346.6666666666667" dx2="346.6666666666667" dy="0.0"/>
+										<Connection Source="FIO_Move_X.value" Destination="INT2INT.IN" Comment="" dx1="233.33333333333334"/>
+									</DataConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<FB Name="Actuator_Transform" Type="Actuator_Transform" Comment="" x="573.3333333333334" y="2820.0">
+								<Parameter Name="Parameter_Home_INT" Value="0"/>
+								<Parameter Name="Parameter_Work_INT" Value="10"/>
+								<Parameter Name="Parameter_INIT_INT" Value="5"/>
+							</FB>
+							<EventConnections>
+								<Connection Source="INIT" Destination="Actuator_Move_X_Analog.INIT" Comment="" dx1="3906.666666666667"/>
+								<Connection Source="Actuator_Move_X_Analog.INITO" Destination="INITO" Comment="" dx1="406.6666666666667"/>
+								<Connection Source="CNF_Actuator" Destination="Actuator_Transform.CNF_Move_Bool" Comment="" dx1="553.3333333333334" dx2="553.3333333333334" dy="0.0"/>
+								<Connection Source="Actuator_Transform.CNF_Move_INT" Destination="Actuator_Move_X_Analog.REQ" Comment="" dx1="973.3333333333334" dx2="973.3333333333334" dy="0.0"/>
+							</EventConnections>
+							<DataConnections>
+								<Connection Source="Data_Actuator" Destination="Actuator_Transform.Data_Bool" Comment="" dx1="146.66666666666669" dx2="146.66666666666669" dy="0.0"/>
+								<Connection Source="Actuator_Transform.Data_INT" Destination="Actuator_Move_X_Analog.Data_Int" Comment="" dx1="1293.3333333333335" dx2="1293.3333333333335" dy="0.0"/>
+							</DataConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+						<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+					</SubApp>
+					<SubApp Name="Error_Control" Comment="" x="4573.333333333334" y="2233.3333333333335">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="REQ_Actuator" Type="Event" Comment="">
+									<Attribute Name="YPOSITION" Type="STRING" Value="49"/>
+								</SubAppEvent>
+								<SubAppEvent Name="Sensor_Update" Type="Event" Comment="">
+									<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+								</SubAppEvent>
+								<SubAppEvent Name="CNF_Moved" Type="Event" Comment="">
+									<Attribute Name="YPOSITION" Type="STRING" Value="95"/>
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="Error" Type="Event" Comment="">
+									<Attribute Name="YPOSITION" Type="STRING" Value="64"/>
+								</SubAppEvent>
+							</SubAppEventOutputs>
+							<OutputVars>
+								<VarDeclaration Name="Error_Code" Type="INT" Comment="Error_Code_1_For_Movement_Not_Started_Error_Code_2_For_Movement_Timing">
+									<Attribute Name="YPOSITION" Type="STRING" Value="41"/>
+								</VarDeclaration>
+							</OutputVars>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<SubApp Name="Error_Movement_Not_Started" Comment="" x="1973.3333333333335" y="-993.3333333333334">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="REQ_Actuator" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="Sensor_Update" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="Movement_Started" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="Movement_Not_Started" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<FB Name="E_RTimeOut" Type="E_RTimeOut" Comment="" x="3086.666666666667" y="1366.6666666666667">
+									</FB>
+									<FB Name="Time_Out_Actuator_CommandAndMoved" Type="Time_Out_Actuator_CommandAndMoved2" Comment="" x="1000.0" y="533.3333333333334">
+										<Parameter Name="ExpectedResponseTime" Value="T#1s"/>
+									</FB>
+									<EventConnections>
+										<Connection Source="REQ_Actuator" Destination="Time_Out_Actuator_CommandAndMoved.Actuator_Request_Sent" Comment="" dx1="1166.6666666666667" dx2="1166.6666666666667" dy="0.0"/>
+										<Connection Source="Sensor_Update" Destination="Time_Out_Actuator_CommandAndMoved.Actuator_Started_Moving" Comment="" dx1="720.0" dx2="1166.6666666666667" dy="0.0"/>
+										<Connection Source="Time_Out_Actuator_CommandAndMoved.Movement_OK" Destination="Movement_Started" Comment="" dx1="1780.0" dx2="1740.0" dy="0.0"/>
+										<Connection Source="Time_Out_Actuator_CommandAndMoved.Movement_Not_Started" Destination="Movement_Not_Started" Comment="" dx1="1740.0"/>
+									</EventConnections>
+									<AdapterConnections>
+										<Connection Source="Time_Out_Actuator_CommandAndMoved.PLUG1" Destination="E_RTimeOut.TimeOutSocket" Comment="" dx1="80.0" dx2="80.0" dy="313.33333333333337"/>
+									</AdapterConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<SubApp Name="Error_Movement_Timing" Comment="" x="2060.0" y="-66.66666666666667">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="REQ_Actuator" Type="Event" Comment="">
+											<Attribute Name="YPOSITION" Type="STRING" Value="49"/>
+										</SubAppEvent>
+										<SubAppEvent Name="CNF_Moved" Type="Event" Comment="">
+											<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="Movement_Timing_OK" Type="Event" Comment="">
+											<Attribute Name="YPOSITION" Type="STRING" Value="49"/>
+										</SubAppEvent>
+										<SubAppEvent Name="Movement_Timing_Error" Type="Event" Comment="">
+											<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+										</SubAppEvent>
+									</SubAppEventOutputs>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<FB Name="E_STOPWATCH" Type="E_STOPWATCH" Comment="" x="-506.6666666666667" y="293.33333333333337">
+									</FB>
+									<FB Name="Time_Out_Actuator_CommandAndMoved2" Type="Time_Out_Actuator_CommandAndMoved" Comment="" x="1100.0" y="280.0">
+										<Parameter Name="ExpectedMovingTime" Value="T#2s"/>
+									</FB>
+									<FB Name="E_RTimeOut" Type="E_RTimeOut" Comment="" x="2926.666666666667" y="3280.0">
+									</FB>
+									<FB Name="TimeOutMovement" Type="TimeOutMovement" Comment="" x="-66.66666666666667" y="2480.0">
+										<Parameter Name="ExpectedResponseTime" Value="T#2s"/>
+									</FB>
+									<EventConnections>
+										<Connection Source="E_STOPWATCH.EO" Destination="Time_Out_Actuator_CommandAndMoved2.Timing_REQ" Comment="" dx1="640.0"/>
+										<Connection Source="REQ_Actuator" Destination="TimeOutMovement.Actuator_Request_Sent" Comment="" dx1="333.33333333333337" dx2="333.33333333333337" dy="0.0"/>
+										<Connection Source="CNF_Moved" Destination="TimeOutMovement.CNF_Moved" Comment="" dx1="206.66666666666669" dx2="206.66666666666669" dy="0.0"/>
+										<Connection Source="TimeOutMovement.Improper_Movement" Destination="Movement_Timing_Error" Comment="" dx1="1840.0" dx2="1840.0" dy="0.0"/>
+										<Connection Source="TimeOutMovement.Movement_OK" Destination="Movement_Timing_OK" Comment="" dx1="1606.6666666666667"/>
+										<Connection Source="REQ_Actuator" Destination="E_STOPWATCH.START" Comment="" dx1="413.33333333333337"/>
+										<Connection Source="CNF_Moved" Destination="E_STOPWATCH.STOP" Comment="" dx1="413.33333333333337"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="E_STOPWATCH.TD" Destination="Time_Out_Actuator_CommandAndMoved2.Current_Moving_Time" Comment="" dx1="320.0"/>
+									</DataConnections>
+									<AdapterConnections>
+										<Connection Source="TimeOutMovement.PLUG1" Destination="E_RTimeOut.TimeOutSocket" Comment="" dx1="780.0" dx2="780.0" dy="0.0"/>
+									</AdapterConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<FB Name="Error_Merge" Type="Error_Merge" Comment="" x="4280.0" y="-873.3333333333334">
+							</FB>
+							<EventConnections>
+								<Connection Source="REQ_Actuator" Destination="Error_Movement_Not_Started.REQ_Actuator" Comment="" dx1="320.0"/>
+								<Connection Source="Sensor_Update" Destination="Error_Movement_Not_Started.Sensor_Update" Comment="" dx1="320.0"/>
+								<Connection Source="CNF_Moved" Destination="Error_Movement_Timing.CNF_Moved" Comment="" dx1="213.33333333333334"/>
+								<Connection Source="Error_Movement_Timing.Movement_Timing_Error" Destination="Error_Merge.Error_2" Comment="" dx1="293.33333333333337"/>
+								<Connection Source="Error_Merge.Error" Destination="Error" Comment="" dx1="880.0"/>
+								<Connection Source="Error_Movement_Not_Started.Movement_Not_Started" Destination="Error_Merge.Error_1" Comment="" dx1="293.33333333333337" dx2="293.33333333333337" dy="0.0"/>
+								<Connection Source="REQ_Actuator" Destination="Error_Movement_Timing.REQ_Actuator" Comment="" dx1="320.0" dx2="86.66666666666667" dy="0.0"/>
+							</EventConnections>
+							<DataConnections>
+								<Connection Source="Error_Merge.Error_Code" Destination="Error_Code" Comment="" dx1="880.0"/>
+							</DataConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="3340.0"/>
+						<Attribute Name="height" Type="LREAL" Value="1740.0"/>
+					</SubApp>
+					<FB Name="HW_Control" Type="HW_Control" Comment="" x="4286.666666666667" y="600.0">
+					</FB>
+					<SubApp Name="Sensor" Comment="" x="2000.0" y="2266.666666666667">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="INIT" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="INITO" Type="Event" Comment="">
+								</SubAppEvent>
+								<SubAppEvent Name="Sensor_Update" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventOutputs>
+							<OutputVars>
+								<VarDeclaration Name="Sensor_Home" Type="BOOL" Comment=""/>
+								<VarDeclaration Name="Sensor_Work" Type="BOOL" Comment=""/>
+							</OutputVars>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<SubApp Name="Sensor_Digital_Work" Comment="" x="433.33333333333337" y="1800.0">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="INIT" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="INITO" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="CNF_Sensor_Work" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+									<OutputVars>
+										<VarDeclaration Name="Data_CNF_Sensor_Work" Type="BOOL" Comment=""/>
+									</OutputVars>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<SubApp Name="Work_1" Type="OPC_SUB_1_FixIDBool" Comment="" x="266.6666666666667" y="1200.0">
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+										<Parameter Name="QI" Value="1"/>
+										<Parameter Name="prefix" Value="&quot;FIO_I_&quot;"/>
+										<Parameter Name="var1" Value="&quot;Diffuse_Sensor_Work&quot;"/>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<FB Name="BOOL2BOOL_1" Type="BOOL2BOOL" Comment="" x="2533.3333333333335" y="700.0">
+									</FB>
+									<EventConnections>
+										<Connection Source="Work_1.IND" Destination="BOOL2BOOL_1.REQ" Comment="" dx1="420.0"/>
+										<Connection Source="INIT" Destination="Work_1.INIT" Comment="" dx1="1133.3333333333335"/>
+										<Connection Source="Work_1.INITO" Destination="INITO" Comment="" dx1="780.0"/>
+										<Connection Source="BOOL2BOOL_1.CNF" Destination="CNF_Sensor_Work" Comment="" dx1="273.33333333333337"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="Work_1.value" Destination="BOOL2BOOL_1.IN" Comment="" dx1="420.0"/>
+										<Connection Source="BOOL2BOOL_1.OUT" Destination="Data_CNF_Sensor_Work" Comment="" dx1="380.0"/>
+									</DataConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<SubApp Name="Sensor_Digital_Home" Comment="" x="560.0" y="-140.0">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="INIT" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="INITO" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="CNF_Sensor_Home" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+									<OutputVars>
+										<VarDeclaration Name="Data_CNF_Sensor_Home" Type="BOOL" Comment=""/>
+									</OutputVars>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<SubApp Name="Work_1" Type="OPC_SUB_1_FixIDBool" Comment="" x="1000.0" y="500.0">
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+										<Parameter Name="QI" Value="1"/>
+										<Parameter Name="prefix" Value="&quot;FIO_I_&quot;"/>
+										<Parameter Name="var1" Value="&quot;Diffuse_Sensor_Home&quot;"/>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<FB Name="BOOL2BOOL_1" Type="BOOL2BOOL" Comment="" x="2533.3333333333335" y="700.0">
+									</FB>
+									<EventConnections>
+										<Connection Source="Work_1.IND" Destination="BOOL2BOOL_1.REQ" Comment="" dx1="200.0"/>
+										<Connection Source="INIT" Destination="Work_1.INIT" Comment="" dx1="40.0" dx2="40.0" dy="220.0"/>
+										<Connection Source="Work_1.INITO" Destination="INITO" Comment="" dx1="3513.3333333333335"/>
+										<Connection Source="BOOL2BOOL_1.CNF" Destination="CNF_Sensor_Home" Comment="" dx1="3000.0"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="Work_1.value" Destination="BOOL2BOOL_1.IN" Comment="" dx1="200.0"/>
+										<Connection Source="BOOL2BOOL_1.OUT" Destination="Data_CNF_Sensor_Home" Comment="" dx1="3000.0"/>
+									</DataConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<SubApp Name="Sensor_Transform" Comment="" x="4433.333333333334" y="506.6666666666667">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="CNF_Sensor_Home" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="CNF_Sensor_Work" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="Sensor_Update" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+									<InputVars>
+										<VarDeclaration Name="Data_CNF_Sensor_Home" Type="BOOL" Comment=""/>
+										<VarDeclaration Name="Data_CNF_Sensor_Work" Type="BOOL" Comment=""/>
+									</InputVars>
+									<OutputVars>
+										<VarDeclaration Name="CNF_Home" Type="BOOL" Comment=""/>
+										<VarDeclaration Name="CNF_Work" Type="BOOL" Comment=""/>
+									</OutputVars>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<FB Name="Sensor_Merge_Home_And_Work" Type="Sensor_Merge2" Comment="" x="3800.0" y="333.33333333333337">
+									</FB>
+									<SubApp Name="Sensor_Work_Preperation" Comment="" x="873.3333333333334" y="1200.0">
+										<SubAppInterfaceList>
+											<SubAppEventInputs>
+												<SubAppEvent Name="CNF_Sensor_Work" Type="Event" Comment="">
+												</SubAppEvent>
+											</SubAppEventInputs>
+											<SubAppEventOutputs>
+												<SubAppEvent Name="Sensor_Work_Rising_Edge" Type="Event" Comment="">
+												</SubAppEvent>
+												<SubAppEvent Name="Sensor_Work_Falling_Edge" Type="Event" Comment="">
+												</SubAppEvent>
+											</SubAppEventOutputs>
+											<InputVars>
+												<VarDeclaration Name="Data_CNF_Sensor_Work" Type="BOOL" Comment=""/>
+											</InputVars>
+										</SubAppInterfaceList>
+										<SubAppNetwork>
+											<FB Name="E_F_TRIG_Work" Type="E_F_TRIG" Comment="" x="1520.0" y="1206.6666666666667">
+											</FB>
+											<FB Name="E_R_TRIG_Work" Type="E_R_TRIG" Comment="" x="1513.3333333333335" y="606.6666666666667">
+											</FB>
+											<EventConnections>
+												<Connection Source="E_F_TRIG_Work.EO" Destination="Sensor_Work_Falling_Edge" Comment="" dx1="906.6666666666667"/>
+												<Connection Source="E_R_TRIG_Work.EO" Destination="Sensor_Work_Rising_Edge" Comment="" dx1="913.3333333333334"/>
+												<Connection Source="CNF_Sensor_Work" Destination="E_R_TRIG_Work.EI" Comment="" dx1="240.0"/>
+												<Connection Source="CNF_Sensor_Work" Destination="E_F_TRIG_Work.EI" Comment="" dx1="246.66666666666669"/>
+											</EventConnections>
+											<DataConnections>
+												<Connection Source="Data_CNF_Sensor_Work" Destination="E_R_TRIG_Work.QI" Comment="" dx1="240.0"/>
+												<Connection Source="Data_CNF_Sensor_Work" Destination="E_F_TRIG_Work.QI" Comment="" dx1="246.66666666666669"/>
+											</DataConnections>
+										</SubAppNetwork>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<SubApp Name="Sensor_Home_Preperation" Comment="" x="840.0" y="260.0">
+										<SubAppInterfaceList>
+											<SubAppEventInputs>
+												<SubAppEvent Name="CNF_Sensor_Home" Type="Event" Comment="">
+												</SubAppEvent>
+											</SubAppEventInputs>
+											<SubAppEventOutputs>
+												<SubAppEvent Name="Sensor_Home_Rising_Edge" Type="Event" Comment="">
+												</SubAppEvent>
+												<SubAppEvent Name="Sensor_Home_Falling_Edge" Type="Event" Comment="">
+												</SubAppEvent>
+											</SubAppEventOutputs>
+											<InputVars>
+												<VarDeclaration Name="Data_CNF_Sensor_Home" Type="BOOL" Comment=""/>
+											</InputVars>
+										</SubAppInterfaceList>
+										<SubAppNetwork>
+											<FB Name="E_F_TRIG_Home" Type="E_F_TRIG" Comment="" x="1520.0" y="1206.6666666666667">
+											</FB>
+											<FB Name="E_R_TRIG_Home" Type="E_R_TRIG" Comment="" x="1513.3333333333335" y="606.6666666666667">
+											</FB>
+											<EventConnections>
+												<Connection Source="E_F_TRIG_Home.EO" Destination="Sensor_Home_Falling_Edge" Comment="" dx1="906.6666666666667"/>
+												<Connection Source="E_R_TRIG_Home.EO" Destination="Sensor_Home_Rising_Edge" Comment="" dx1="913.3333333333334"/>
+												<Connection Source="CNF_Sensor_Home" Destination="E_R_TRIG_Home.EI" Comment="" dx1="240.0"/>
+												<Connection Source="CNF_Sensor_Home" Destination="E_F_TRIG_Home.EI" Comment="" dx1="246.66666666666669"/>
+											</EventConnections>
+											<DataConnections>
+												<Connection Source="Data_CNF_Sensor_Home" Destination="E_R_TRIG_Home.QI" Comment="" dx1="240.0"/>
+												<Connection Source="Data_CNF_Sensor_Home" Destination="E_F_TRIG_Home.QI" Comment="" dx1="246.66666666666669"/>
+											</DataConnections>
+										</SubAppNetwork>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<EventConnections>
+										<Connection Source="Sensor_Merge_Home_And_Work.Sensor_Update" Destination="Sensor_Update" Comment="" dx1="873.3333333333334"/>
+										<Connection Source="Sensor_Work_Preperation.Sensor_Work_Falling_Edge" Destination="Sensor_Merge_Home_And_Work.Sensor_Work_F" Comment="" dx1="646.6666666666667"/>
+										<Connection Source="Sensor_Work_Preperation.Sensor_Work_Rising_Edge" Destination="Sensor_Merge_Home_And_Work.Sensor_Work_R" Comment="" dx1="460.0"/>
+										<Connection Source="CNF_Sensor_Work" Destination="Sensor_Work_Preperation.CNF_Sensor_Work" Comment="" dx1="586.6666666666667"/>
+										<Connection Source="Sensor_Home_Preperation.Sensor_Home_Falling_Edge" Destination="Sensor_Merge_Home_And_Work.Sensor_Home_F" Comment="" dx1="480.0"/>
+										<Connection Source="Sensor_Home_Preperation.Sensor_Home_Rising_Edge" Destination="Sensor_Merge_Home_And_Work.Sensor_Home_R" Comment="" dx1="480.0"/>
+										<Connection Source="CNF_Sensor_Home" Destination="Sensor_Home_Preperation.CNF_Sensor_Home" Comment="" dx1="760.0"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="Sensor_Merge_Home_And_Work.CNF_Home" Destination="CNF_Home" Comment="" dx1="873.3333333333334"/>
+										<Connection Source="Sensor_Merge_Home_And_Work.CNF_Work" Destination="CNF_Work" Comment="" dx1="873.3333333333334"/>
+										<Connection Source="Data_CNF_Sensor_Work" Destination="Sensor_Work_Preperation.Data_CNF_Sensor_Work" Comment="" dx1="586.6666666666667"/>
+										<Connection Source="Data_CNF_Sensor_Home" Destination="Sensor_Home_Preperation.Data_CNF_Sensor_Home" Comment="" dx1="760.0"/>
+									</DataConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<EventConnections>
+								<Connection Source="Sensor_Digital_Home.INITO" Destination="Sensor_Digital_Work.INIT" Comment="" dx1="80.0" dx2="80.0" dy="826.6666666666667"/>
+								<Connection Source="INIT" Destination="Sensor_Digital_Home.INIT" Comment="" dx1="740.0"/>
+								<Connection Source="Sensor_Digital_Work.INITO" Destination="INITO" Comment="" dx1="666.6666666666667"/>
+								<Connection Source="Sensor_Digital_Work.CNF_Sensor_Work" Destination="Sensor_Transform.CNF_Sensor_Work" Comment="" dx1="1473.3333333333335"/>
+								<Connection Source="Sensor_Digital_Home.CNF_Sensor_Home" Destination="Sensor_Transform.CNF_Sensor_Home" Comment="" dx1="1420.0"/>
+								<Connection Source="Sensor_Transform.Sensor_Update" Destination="Sensor_Update" Comment="" dx1="1833.3333333333335"/>
+							</EventConnections>
+							<DataConnections>
+								<Connection Source="Sensor_Digital_Work.Data_CNF_Sensor_Work" Destination="Sensor_Transform.Data_CNF_Sensor_Work" Comment="" dx1="1840.0"/>
+								<Connection Source="Sensor_Digital_Home.Data_CNF_Sensor_Home" Destination="Sensor_Transform.Data_CNF_Sensor_Home" Comment="" dx1="1320.0"/>
+								<Connection Source="Sensor_Transform.CNF_Work" Destination="Sensor_Work" Comment="" dx1="1833.3333333333335"/>
+								<Connection Source="Sensor_Transform.CNF_Home" Destination="Sensor_Home" Comment="" dx1="1833.3333333333335"/>
+							</DataConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+						<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+					</SubApp>
+					<EventConnections>
+						<Connection Source="HW_Control.REQ_Actuator" Destination="Actuator.CNF_Actuator" Comment="" dx1="1006.6666666666667"/>
+						<Connection Source="HW_Control.REQ_Actuator" Destination="Error_Control.REQ_Actuator" Comment="" dx1="80.0" dx2="80.0" dy="933.3333333333334"/>
+						<Connection Source="HW_Control.Moved" Destination="Error_Control.CNF_Moved" Comment="" dx1="80.0" dx2="80.0" dy="986.6666666666667"/>
+						<Connection Source="REQ_Move" Destination="HW_Control.REQ_Move" Comment="" dx1="1786.6666666666667"/>
+						<Connection Source="HW_Control.Moved" Destination="Moved" Comment="" dx1="1620.0"/>
+						<Connection Source="Error_Control.Error" Destination="Error" Comment="" dx1="626.6666666666667"/>
+						<Connection Source="INIT" Destination="Actuator.INIT" Comment="" dx1="5620.0"/>
+						<Connection Source="Actuator.INITO" Destination="Sensor.INIT" Comment="" dx1="80.0" dx2="80.0" dy="713.3333333333334"/>
+						<Connection Source="Sensor.Sensor_Update" Destination="Error_Control.Sensor_Update" Comment="" dx1="513.3333333333334"/>
+						<Connection Source="Sensor.Sensor_Update" Destination="HW_Control.Sensor_Update" Comment="" dx1="366.6666666666667"/>
+					</EventConnections>
+					<DataConnections>
+						<Connection Source="HW_Control.Data_Actuator" Destination="Actuator.Data_Actuator" Comment="" dx1="813.3333333333334"/>
+						<Connection Source="Move_Destination" Destination="HW_Control.Move_Destination" Comment="" dx1="1820.0"/>
+						<Connection Source="Error_Control.Error_Code" Destination="Error_Code" Comment="" dx1="740.0"/>
+						<Connection Source="Sensor.Sensor_Home" Destination="HW_Control.Sensor_Home" Comment="" dx1="366.6666666666667"/>
+						<Connection Source="Sensor.Sensor_Work" Destination="HW_Control.Sensor_Work" Comment="" dx1="366.6666666666667"/>
+					</DataConnections>
+				</SubAppNetwork>
+				<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+				<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+			</SubApp>
+			<SubApp Name="Hardware_Move_Z" Comment="Hardware" x="8266.666666666668" y="533.3333333333334">
+				<SubAppInterfaceList>
+					<SubAppEventInputs>
+						<SubAppEvent Name="INIT" Type="Event" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="20"/>
+						</SubAppEvent>
+						<SubAppEvent Name="REQ_Move" Type="Event" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="101"/>
+						</SubAppEvent>
+					</SubAppEventInputs>
+					<SubAppEventOutputs>
+						<SubAppEvent Name="Moved" Type="Event" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="151"/>
+						</SubAppEvent>
+						<SubAppEvent Name="Error" Type="Event" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="73"/>
+						</SubAppEvent>
+					</SubAppEventOutputs>
+					<InputVars>
+						<VarDeclaration Name="Move_Destination" Type="STRING" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="57"/>
+						</VarDeclaration>
+					</InputVars>
+					<OutputVars>
+						<VarDeclaration Name="Error_Code" Type="INT" Comment="">
+							<Attribute Name="YPOSITION" Type="STRING" Value="57"/>
+						</VarDeclaration>
+					</OutputVars>
+				</SubAppInterfaceList>
+				<SubAppNetwork>
+					<SubApp Name="Actuator" Comment="" x="7180.0" y="2306.666666666667">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="INIT" Type="Event" Comment="">
+								</SubAppEvent>
+								<SubAppEvent Name="CNF_Actuator" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="INITO" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventOutputs>
+							<InputVars>
+								<VarDeclaration Name="Data_Actuator" Type="BOOL" Comment=""/>
+							</InputVars>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<SubApp Name="Actuator_Move_X_Analog" Comment="" x="3220.0" y="1853.3333333333335">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="INIT" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="REQ" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="INITO" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="CNF" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+									<InputVars>
+										<VarDeclaration Name="Data_Int" Type="INT" Comment=""/>
+									</InputVars>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<FB Name="INT2INT" Type="INT2INT" Comment="" x="2660.0" y="3413.3333333333335">
+									</FB>
+									<SubApp Name="FIO_Move_X" Type="OPC_SUB_1_FixID_INT" Comment="" x="993.3333333333334" y="2646.666666666667">
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+										<Parameter Name="QI" Value="1"/>
+										<Parameter Name="prefix" Value="&quot;FIO_Q_&quot;"/>
+										<Parameter Name="var1" Value="&quot;Move_X_&quot;"/>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<SubApp Name="OPC_PUB_1" Type="OPC_PUB_1" Comment="" x="4373.333333333334" y="3246.666666666667">
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+										<Parameter Name="QI" Value="1"/>
+										<Parameter Name="prefix" Value="&quot;FIO_Q_&quot;"/>
+										<Parameter Name="var1" Value="&quot;Move_X_&quot;"/>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<EventConnections>
+										<Connection Source="INIT" Destination="FIO_Move_X.INIT" Comment="" dx1="1166.6666666666667"/>
+										<Connection Source="FIO_Move_X.IND" Destination="INT2INT.REQ" Comment="" dx1="233.33333333333334"/>
+										<Connection Source="FIO_Move_X.INITO" Destination="OPC_PUB_1.INIT" Comment="" dx1="1106.6666666666667" dx2="1106.6666666666667" dy="0.0"/>
+										<Connection Source="OPC_PUB_1.CNF" Destination="CNF" Comment="" dx1="626.6666666666667" dx2="626.6666666666667" dy="0.0"/>
+										<Connection Source="OPC_PUB_1.INITO" Destination="INITO" Comment="" dx1="460.0" dx2="460.0" dy="0.0"/>
+										<Connection Source="REQ" Destination="OPC_PUB_1.REQ" Comment="" dx1="2853.3333333333335"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="Data_Int" Destination="OPC_PUB_1.value" Comment="" dx1="346.6666666666667" dx2="346.6666666666667" dy="0.0"/>
+										<Connection Source="FIO_Move_X.value" Destination="INT2INT.IN" Comment="" dx1="233.33333333333334"/>
+									</DataConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<FB Name="Actuator_Transform" Type="Actuator_Transform" Comment="" x="573.3333333333334" y="2820.0">
+								<Parameter Name="Parameter_Home_INT" Value="0"/>
+								<Parameter Name="Parameter_Work_INT" Value="10"/>
+								<Parameter Name="Parameter_INIT_INT" Value="5"/>
+							</FB>
+							<EventConnections>
+								<Connection Source="INIT" Destination="Actuator_Move_X_Analog.INIT" Comment="" dx1="3906.666666666667"/>
+								<Connection Source="Actuator_Move_X_Analog.INITO" Destination="INITO" Comment="" dx1="406.6666666666667"/>
+								<Connection Source="CNF_Actuator" Destination="Actuator_Transform.CNF_Move_Bool" Comment="" dx1="553.3333333333334" dx2="553.3333333333334" dy="0.0"/>
+								<Connection Source="Actuator_Transform.CNF_Move_INT" Destination="Actuator_Move_X_Analog.REQ" Comment="" dx1="973.3333333333334" dx2="973.3333333333334" dy="0.0"/>
+							</EventConnections>
+							<DataConnections>
+								<Connection Source="Data_Actuator" Destination="Actuator_Transform.Data_Bool" Comment="" dx1="146.66666666666669" dx2="146.66666666666669" dy="0.0"/>
+								<Connection Source="Actuator_Transform.Data_INT" Destination="Actuator_Move_X_Analog.Data_Int" Comment="" dx1="1293.3333333333335" dx2="1293.3333333333335" dy="0.0"/>
+							</DataConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+						<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+					</SubApp>
+					<SubApp Name="Error_Control" Comment="" x="4573.333333333334" y="2233.3333333333335">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="REQ_Actuator" Type="Event" Comment="">
+									<Attribute Name="YPOSITION" Type="STRING" Value="49"/>
+								</SubAppEvent>
+								<SubAppEvent Name="Sensor_Update" Type="Event" Comment="">
+									<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+								</SubAppEvent>
+								<SubAppEvent Name="CNF_Moved" Type="Event" Comment="">
+									<Attribute Name="YPOSITION" Type="STRING" Value="95"/>
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="Error" Type="Event" Comment="">
+									<Attribute Name="YPOSITION" Type="STRING" Value="64"/>
+								</SubAppEvent>
+							</SubAppEventOutputs>
+							<OutputVars>
+								<VarDeclaration Name="Error_Code" Type="INT" Comment="Error_Code_1_For_Movement_Not_Started_Error_Code_2_For_Movement_Timing">
+									<Attribute Name="YPOSITION" Type="STRING" Value="41"/>
+								</VarDeclaration>
+							</OutputVars>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<SubApp Name="Error_Movement_Not_Started" Comment="" x="1973.3333333333335" y="-993.3333333333334">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="REQ_Actuator" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="Sensor_Update" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="Movement_Started" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="Movement_Not_Started" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<FB Name="E_RTimeOut" Type="E_RTimeOut" Comment="" x="3086.666666666667" y="1366.6666666666667">
+									</FB>
+									<FB Name="Time_Out_Actuator_CommandAndMoved" Type="Time_Out_Actuator_CommandAndMoved2" Comment="" x="1000.0" y="533.3333333333334">
+										<Parameter Name="ExpectedResponseTime" Value="T#1s"/>
+									</FB>
+									<EventConnections>
+										<Connection Source="REQ_Actuator" Destination="Time_Out_Actuator_CommandAndMoved.Actuator_Request_Sent" Comment="" dx1="1166.6666666666667" dx2="1166.6666666666667" dy="0.0"/>
+										<Connection Source="Sensor_Update" Destination="Time_Out_Actuator_CommandAndMoved.Actuator_Started_Moving" Comment="" dx1="720.0" dx2="1166.6666666666667" dy="0.0"/>
+										<Connection Source="Time_Out_Actuator_CommandAndMoved.Movement_OK" Destination="Movement_Started" Comment="" dx1="1780.0" dx2="1740.0" dy="0.0"/>
+										<Connection Source="Time_Out_Actuator_CommandAndMoved.Movement_Not_Started" Destination="Movement_Not_Started" Comment="" dx1="1740.0"/>
+									</EventConnections>
+									<AdapterConnections>
+										<Connection Source="Time_Out_Actuator_CommandAndMoved.PLUG1" Destination="E_RTimeOut.TimeOutSocket" Comment="" dx1="80.0" dx2="80.0" dy="313.33333333333337"/>
+									</AdapterConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<SubApp Name="Error_Movement_Timing" Comment="" x="2060.0" y="-66.66666666666667">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="REQ_Actuator" Type="Event" Comment="">
+											<Attribute Name="YPOSITION" Type="STRING" Value="49"/>
+										</SubAppEvent>
+										<SubAppEvent Name="CNF_Moved" Type="Event" Comment="">
+											<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="Movement_Timing_OK" Type="Event" Comment="">
+											<Attribute Name="YPOSITION" Type="STRING" Value="49"/>
+										</SubAppEvent>
+										<SubAppEvent Name="Movement_Timing_Error" Type="Event" Comment="">
+											<Attribute Name="YPOSITION" Type="STRING" Value="0"/>
+										</SubAppEvent>
+									</SubAppEventOutputs>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<FB Name="E_STOPWATCH" Type="E_STOPWATCH" Comment="" x="-506.6666666666667" y="293.33333333333337">
+									</FB>
+									<FB Name="Time_Out_Actuator_CommandAndMoved2" Type="Time_Out_Actuator_CommandAndMoved" Comment="" x="1100.0" y="280.0">
+										<Parameter Name="ExpectedMovingTime" Value="T#2s"/>
+									</FB>
+									<FB Name="E_RTimeOut" Type="E_RTimeOut" Comment="" x="2926.666666666667" y="3280.0">
+									</FB>
+									<FB Name="TimeOutMovement" Type="TimeOutMovement" Comment="" x="-66.66666666666667" y="2480.0">
+										<Parameter Name="ExpectedResponseTime" Value="T#2s"/>
+									</FB>
+									<EventConnections>
+										<Connection Source="E_STOPWATCH.EO" Destination="Time_Out_Actuator_CommandAndMoved2.Timing_REQ" Comment="" dx1="640.0"/>
+										<Connection Source="REQ_Actuator" Destination="TimeOutMovement.Actuator_Request_Sent" Comment="" dx1="333.33333333333337" dx2="333.33333333333337" dy="0.0"/>
+										<Connection Source="CNF_Moved" Destination="TimeOutMovement.CNF_Moved" Comment="" dx1="206.66666666666669" dx2="206.66666666666669" dy="0.0"/>
+										<Connection Source="TimeOutMovement.Improper_Movement" Destination="Movement_Timing_Error" Comment="" dx1="1840.0" dx2="1840.0" dy="0.0"/>
+										<Connection Source="TimeOutMovement.Movement_OK" Destination="Movement_Timing_OK" Comment="" dx1="1606.6666666666667"/>
+										<Connection Source="REQ_Actuator" Destination="E_STOPWATCH.START" Comment="" dx1="413.33333333333337"/>
+										<Connection Source="CNF_Moved" Destination="E_STOPWATCH.STOP" Comment="" dx1="413.33333333333337"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="E_STOPWATCH.TD" Destination="Time_Out_Actuator_CommandAndMoved2.Current_Moving_Time" Comment="" dx1="320.0"/>
+									</DataConnections>
+									<AdapterConnections>
+										<Connection Source="TimeOutMovement.PLUG1" Destination="E_RTimeOut.TimeOutSocket" Comment="" dx1="780.0" dx2="780.0" dy="0.0"/>
+									</AdapterConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<FB Name="Error_Merge" Type="Error_Merge" Comment="" x="4280.0" y="-873.3333333333334">
+							</FB>
+							<EventConnections>
+								<Connection Source="REQ_Actuator" Destination="Error_Movement_Not_Started.REQ_Actuator" Comment="" dx1="320.0"/>
+								<Connection Source="Sensor_Update" Destination="Error_Movement_Not_Started.Sensor_Update" Comment="" dx1="320.0"/>
+								<Connection Source="CNF_Moved" Destination="Error_Movement_Timing.CNF_Moved" Comment="" dx1="213.33333333333334"/>
+								<Connection Source="Error_Movement_Timing.Movement_Timing_Error" Destination="Error_Merge.Error_2" Comment="" dx1="293.33333333333337"/>
+								<Connection Source="Error_Merge.Error" Destination="Error" Comment="" dx1="880.0"/>
+								<Connection Source="Error_Movement_Not_Started.Movement_Not_Started" Destination="Error_Merge.Error_1" Comment="" dx1="293.33333333333337" dx2="293.33333333333337" dy="0.0"/>
+								<Connection Source="REQ_Actuator" Destination="Error_Movement_Timing.REQ_Actuator" Comment="" dx1="320.0" dx2="86.66666666666667" dy="0.0"/>
+							</EventConnections>
+							<DataConnections>
+								<Connection Source="Error_Merge.Error_Code" Destination="Error_Code" Comment="" dx1="880.0"/>
+							</DataConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="3340.0"/>
+						<Attribute Name="height" Type="LREAL" Value="1740.0"/>
+					</SubApp>
+					<SubApp Name="Sensor" Comment="" x="2320.0" y="2253.3333333333335">
+						<SubAppInterfaceList>
+							<SubAppEventInputs>
+								<SubAppEvent Name="INIT" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventInputs>
+							<SubAppEventOutputs>
+								<SubAppEvent Name="INITO" Type="Event" Comment="">
+								</SubAppEvent>
+								<SubAppEvent Name="Sensor_Update" Type="Event" Comment="">
+								</SubAppEvent>
+							</SubAppEventOutputs>
+							<OutputVars>
+								<VarDeclaration Name="Sensor_Home" Type="BOOL" Comment=""/>
+								<VarDeclaration Name="Sensor_Work" Type="BOOL" Comment=""/>
+							</OutputVars>
+						</SubAppInterfaceList>
+						<SubAppNetwork>
+							<SubApp Name="Sensor_Digital_Work" Comment="" x="686.6666666666667" y="1833.3333333333335">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="INIT" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="INITO" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="CNF_Sensor_Work" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+									<OutputVars>
+										<VarDeclaration Name="Data_CNF_Sensor_Work" Type="BOOL" Comment=""/>
+									</OutputVars>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<SubApp Name="Work_1" Type="OPC_SUB_1_FixIDBool" Comment="" x="1000.0" y="500.0">
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+										<Parameter Name="QI" Value="1"/>
+										<Parameter Name="prefix" Value="&quot;FIO_I_&quot;"/>
+										<Parameter Name="var1" Value="&quot;Diffuse_Sensor_Work&quot;"/>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<FB Name="BOOL2BOOL_1" Type="BOOL2BOOL" Comment="" x="2533.3333333333335" y="700.0">
+									</FB>
+									<EventConnections>
+										<Connection Source="Work_1.IND" Destination="BOOL2BOOL_1.REQ" Comment="" dx1="200.0"/>
+										<Connection Source="INIT" Destination="Work_1.INIT" Comment="" dx1="40.0" dx2="40.0" dy="220.0"/>
+										<Connection Source="Work_1.INITO" Destination="INITO" Comment="" dx1="3513.3333333333335"/>
+										<Connection Source="BOOL2BOOL_1.CNF" Destination="CNF_Sensor_Work" Comment="" dx1="3000.0"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="Work_1.value" Destination="BOOL2BOOL_1.IN" Comment="" dx1="200.0"/>
+										<Connection Source="BOOL2BOOL_1.OUT" Destination="Data_CNF_Sensor_Work" Comment="" dx1="3000.0"/>
+									</DataConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<SubApp Name="Sensor_Transform" Comment="" x="3806.666666666667" y="1693.3333333333335">
+								<SubAppInterfaceList>
+									<SubAppEventInputs>
+										<SubAppEvent Name="CNF_Sensor_Home" Type="Event" Comment="">
+										</SubAppEvent>
+										<SubAppEvent Name="CNF_Sensor_Work" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventInputs>
+									<SubAppEventOutputs>
+										<SubAppEvent Name="Sensor_Update" Type="Event" Comment="">
+										</SubAppEvent>
+									</SubAppEventOutputs>
+									<InputVars>
+										<VarDeclaration Name="Data_CNF_Sensor_Home" Type="BOOL" Comment=""/>
+										<VarDeclaration Name="Data_CNF_Sensor_Work" Type="BOOL" Comment=""/>
+									</InputVars>
+									<OutputVars>
+										<VarDeclaration Name="CNF_Home" Type="BOOL" Comment=""/>
+										<VarDeclaration Name="CNF_Work" Type="BOOL" Comment=""/>
+									</OutputVars>
+								</SubAppInterfaceList>
+								<SubAppNetwork>
+									<FB Name="Sensor_Merge_Home_And_Work" Type="Sensor_Merge2" Comment="" x="3800.0" y="333.33333333333337">
+									</FB>
+									<SubApp Name="Sensor_Work_Preperation" Comment="" x="873.3333333333334" y="1666.6666666666667">
+										<SubAppInterfaceList>
+											<SubAppEventInputs>
+												<SubAppEvent Name="CNF_Sensor_Work" Type="Event" Comment="">
+												</SubAppEvent>
+											</SubAppEventInputs>
+											<SubAppEventOutputs>
+												<SubAppEvent Name="Sensor_Work_Rising_Edge" Type="Event" Comment="">
+												</SubAppEvent>
+												<SubAppEvent Name="Sensor_Work_Falling_Edge" Type="Event" Comment="">
+												</SubAppEvent>
+											</SubAppEventOutputs>
+											<InputVars>
+												<VarDeclaration Name="Data_CNF_Sensor_Work" Type="BOOL" Comment=""/>
+											</InputVars>
+										</SubAppInterfaceList>
+										<SubAppNetwork>
+											<FB Name="E_F_TRIG_Work" Type="E_F_TRIG" Comment="" x="1520.0" y="1206.6666666666667">
+											</FB>
+											<FB Name="E_R_TRIG_Work" Type="E_R_TRIG" Comment="" x="1513.3333333333335" y="606.6666666666667">
+											</FB>
+											<EventConnections>
+												<Connection Source="E_F_TRIG_Work.EO" Destination="Sensor_Work_Falling_Edge" Comment="" dx1="906.6666666666667"/>
+												<Connection Source="E_R_TRIG_Work.EO" Destination="Sensor_Work_Rising_Edge" Comment="" dx1="913.3333333333334"/>
+												<Connection Source="CNF_Sensor_Work" Destination="E_R_TRIG_Work.EI" Comment="" dx1="240.0"/>
+												<Connection Source="CNF_Sensor_Work" Destination="E_F_TRIG_Work.EI" Comment="" dx1="246.66666666666669"/>
+											</EventConnections>
+											<DataConnections>
+												<Connection Source="Data_CNF_Sensor_Work" Destination="E_R_TRIG_Work.QI" Comment="" dx1="240.0"/>
+												<Connection Source="Data_CNF_Sensor_Work" Destination="E_F_TRIG_Work.QI" Comment="" dx1="246.66666666666669"/>
+											</DataConnections>
+										</SubAppNetwork>
+										<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+										<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+									</SubApp>
+									<FB Name="E_DELAY_Work_TRUE" Type="E_DELAY" Comment="This block mimics the function of Sensor Work." x="1673.3333333333335" y="413.33333333333337">
+										<Parameter Name="DT" Value="T#1200ms"/>
+									</FB>
+									<EventConnections>
+										<Connection Source="Sensor_Merge_Home_And_Work.Sensor_Update" Destination="Sensor_Update" Comment="" dx1="873.3333333333334"/>
+										<Connection Source="Sensor_Work_Preperation.Sensor_Work_Falling_Edge" Destination="Sensor_Merge_Home_And_Work.Sensor_Work_F" Comment="" dx1="646.6666666666667"/>
+										<Connection Source="Sensor_Work_Preperation.Sensor_Work_Rising_Edge" Destination="Sensor_Merge_Home_And_Work.Sensor_Work_R" Comment="" dx1="460.0"/>
+										<Connection Source="CNF_Sensor_Work" Destination="Sensor_Work_Preperation.CNF_Sensor_Work" Comment="" dx1="586.6666666666667"/>
+										<Connection Source="E_DELAY_Work_TRUE.EO" Destination="Sensor_Merge_Home_And_Work.Sensor_Home_R" Comment="" dx1="820.0"/>
+										<Connection Source="Sensor_Work_Preperation.Sensor_Work_Falling_Edge" Destination="E_DELAY_Work_TRUE.START" Comment="" dx1="46.66666666666667" dx2="886.6666666666667" dy="-660.0"/>
+									</EventConnections>
+									<DataConnections>
+										<Connection Source="Sensor_Merge_Home_And_Work.CNF_Home" Destination="CNF_Home" Comment="" dx1="873.3333333333334"/>
+										<Connection Source="Sensor_Merge_Home_And_Work.CNF_Work" Destination="CNF_Work" Comment="" dx1="873.3333333333334"/>
+										<Connection Source="Data_CNF_Sensor_Work" Destination="Sensor_Work_Preperation.Data_CNF_Sensor_Work" Comment="" dx1="586.6666666666667"/>
+									</DataConnections>
+								</SubAppNetwork>
+								<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+								<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+							</SubApp>
+							<EventConnections>
+								<Connection Source="INIT" Destination="Sensor_Digital_Work.INIT" Comment="" dx1="973.3333333333334"/>
+								<Connection Source="Sensor_Digital_Work.INITO" Destination="INITO" Comment="" dx1="73.33333333333334"/>
+								<Connection Source="Sensor_Digital_Work.CNF_Sensor_Work" Destination="Sensor_Transform.CNF_Sensor_Work" Comment="" dx1="1273.3333333333335"/>
+								<Connection Source="Sensor_Transform.Sensor_Update" Destination="Sensor_Update" Comment="" dx1="406.6666666666667"/>
+							</EventConnections>
+							<DataConnections>
+								<Connection Source="Sensor_Digital_Work.Data_CNF_Sensor_Work" Destination="Sensor_Transform.Data_CNF_Sensor_Work" Comment="" dx1="1273.3333333333335"/>
+								<Connection Source="Sensor_Transform.CNF_Home" Destination="Sensor_Home" Comment="" dx1="406.6666666666667"/>
+								<Connection Source="Sensor_Transform.CNF_Work" Destination="Sensor_Work" Comment="" dx1="406.6666666666667"/>
+							</DataConnections>
+						</SubAppNetwork>
+						<Attribute Name="width" Type="LREAL" Value="6880.0"/>
+						<Attribute Name="height" Type="LREAL" Value="3326.666666666667"/>
+					</SubApp>
+					<FB Name="HW_Control" Type="HW_Control" Comment="" x="4286.666666666667" y="600.0">
+					</FB>
+					<EventConnections>
+						<Connection Source="HW_Control.REQ_Actuator" Destination="Actuator.CNF_Actuator" Comment="" dx1="1006.6666666666667"/>
+						<Connection Source="HW_Control.REQ_Actuator" Destination="Error_Control.REQ_Actuator" Comment="" dx1="80.0" dx2="80.0" dy="933.3333333333334"/>
+						<Connection Source="HW_Control.Moved" Destination="Error_Control.CNF_Moved" Comment="" dx1="80.0" dx2="80.0" dy="986.6666666666667"/>
+						<Connection Source="Sensor.Sensor_Update" Destination="Error_Control.Sensor_Update" Comment="" dx1="1013.3333333333334"/>
+						<Connection Source="Sensor.Sensor_Update" Destination="HW_Control.Sensor_Update" Comment="" dx1="560.0"/>
+						<Connection Source="Actuator.INITO" Destination="Sensor.INIT" Comment="" dx1="173.33333333333334" dx2="120.0" dy="593.3333333333334"/>
+						<Connection Source="REQ_Move" Destination="HW_Control.REQ_Move" Comment="" dx1="1786.6666666666667"/>
+						<Connection Source="HW_Control.Moved" Destination="Moved" Comment="" dx1="1620.0"/>
+						<Connection Source="Error_Control.Error" Destination="Error" Comment="" dx1="626.6666666666667"/>
+						<Connection Source="INIT" Destination="Actuator.INIT" Comment="" dx1="5620.0"/>
+					</EventConnections>
+					<DataConnections>
+						<Connection Source="HW_Control.Data_Actuator" Destination="Actuator.Data_Actuator" Comment="" dx1="813.3333333333334"/>
+						<Connection Source="Sensor.Sensor_Home" Destination="HW_Control.Sensor_Home" Comment="" dx1="640.0"/>
+						<Connection Source="Sensor.Sensor_Work" Destination="HW_Control.Sensor_Work" Comment="" dx1="720.0"/>
+						<Connection Source="Move_Destination" Destination="HW_Control.Move_Destination" Comment="" dx1="1820.0"/>
+						<Connection Source="Error_Control.Error_Code" Destination="Error_Code" Comment="" dx1="740.0"/>
+					</DataConnections>
+				</SubAppNetwork>
+				<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+				<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+			</SubApp>
+			<FB Name="VacuumGripper" Type="Vacuum" Comment="" x="4800.0" y="266.6666666666667">
+				<Parameter Name="ProductType" Value="'FTSaug'"/>
+			</FB>
+			<EventConnections>
+				<Connection Source="Move_Request.REQ_Move" Destination="Hardware_Move_X.REQ_Move" Comment="" dx1="486.6666666666667"/>
+				<Connection Source="INIT_FIO.INITO" Destination="Hardware_Move_X.INIT" Comment="" dx1="693.3333333333334"/>
+				<Connection Source="Hardware_Move_X.Moved" Destination="Hardware_Move_Z.REQ_Move" Comment="" dx1="146.66666666666669"/>
+				<Connection Source="INIT_FIO.INITO" Destination="Hardware_Move_Z.INIT" Comment="" dx1="1800.0"/>
+				<Connection Source="INIT_FIO.INITO" Destination="VacuumGripper.INIT" Comment="" dx1="586.6666666666667"/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="Move_Request.Move_Destination" Destination="Hardware_Move_X.Move_Destination" Comment="" dx1="486.6666666666667"/>
+				<Connection Source="Move_Request.Move_Destination" Destination="Hardware_Move_Z.Move_Destination" Comment="" dx1="1506.6666666666667"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+	<Device Name="FORTE_PC" Type="FORTE_PC" Comment="" x="5413.333333333334" y="1660.0">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC"/>
+		<Attribute Name="Color" Type="STRING" Value="255,190,111"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<SubApp Name="INIT_FIO" Comment="" x="1706.6666666666667" y="660.0">
+					<SubAppInterfaceList>
+						<SubAppEventInputs>
+							<SubAppEvent Name="INIT" Type="Event" Comment="">
+							</SubAppEvent>
+						</SubAppEventInputs>
+						<SubAppEventOutputs>
+							<SubAppEvent Name="INITO" Type="Event" Comment="">
+							</SubAppEvent>
+						</SubAppEventOutputs>
+					</SubAppInterfaceList>
+					<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+					<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+				</SubApp>
+				<SubApp Name="Move_Request" Comment="" x="760.0" y="1853.3333333333335">
+					<SubAppInterfaceList>
+						<SubAppEventInputs>
+							<SubAppEvent Name="Work" Type="Event" Comment="">
+							</SubAppEvent>
+							<SubAppEvent Name="Home" Type="Event" Comment="">
+							</SubAppEvent>
+						</SubAppEventInputs>
+						<SubAppEventOutputs>
+							<SubAppEvent Name="REQ_Move" Type="Event" Comment="">
+							</SubAppEvent>
+						</SubAppEventOutputs>
+						<OutputVars>
+							<VarDeclaration Name="Move_Destination" Type="STRING" Comment=""/>
+						</OutputVars>
+					</SubAppInterfaceList>
+					<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+					<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+				</SubApp>
+				<SubApp Name="Hardware_Move_X" Comment="" x="5173.333333333334" y="1766.6666666666667">
+					<SubAppInterfaceList>
+						<SubAppEventInputs>
+							<SubAppEvent Name="INIT" Type="Event" Comment="">
+							</SubAppEvent>
+							<SubAppEvent Name="REQ_Move" Type="Event" Comment="">
+							</SubAppEvent>
+						</SubAppEventInputs>
+						<SubAppEventOutputs>
+							<SubAppEvent Name="Moved" Type="Event" Comment="">
+							</SubAppEvent>
+							<SubAppEvent Name="Error" Type="Event" Comment="">
+							</SubAppEvent>
+						</SubAppEventOutputs>
+						<InputVars>
+							<VarDeclaration Name="Move_Destination" Type="STRING" Comment=""/>
+						</InputVars>
+						<OutputVars>
+							<VarDeclaration Name="Error_Code" Type="INT" Comment=""/>
+						</OutputVars>
+					</SubAppInterfaceList>
+					<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+					<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+				</SubApp>
+				<SubApp Name="Hardware_Move_Z" Comment="" x="8166.666666666667" y="-266.6666666666667">
+					<SubAppInterfaceList>
+						<SubAppEventInputs>
+							<SubAppEvent Name="INIT" Type="Event" Comment="">
+								<Attribute Name="YPOSITION" Type="STRING" Value="20"/>
+							</SubAppEvent>
+							<SubAppEvent Name="REQ_Move" Type="Event" Comment="">
+								<Attribute Name="YPOSITION" Type="STRING" Value="101"/>
+							</SubAppEvent>
+						</SubAppEventInputs>
+						<SubAppEventOutputs>
+							<SubAppEvent Name="Moved" Type="Event" Comment="">
+								<Attribute Name="YPOSITION" Type="STRING" Value="151"/>
+							</SubAppEvent>
+							<SubAppEvent Name="Error" Type="Event" Comment="">
+								<Attribute Name="YPOSITION" Type="STRING" Value="73"/>
+							</SubAppEvent>
+						</SubAppEventOutputs>
+						<InputVars>
+							<VarDeclaration Name="Move_Destination" Type="STRING" Comment="">
+								<Attribute Name="YPOSITION" Type="STRING" Value="57"/>
+							</VarDeclaration>
+						</InputVars>
+						<OutputVars>
+							<VarDeclaration Name="Error_Code" Type="INT" Comment="">
+								<Attribute Name="YPOSITION" Type="STRING" Value="57"/>
+							</VarDeclaration>
+						</OutputVars>
+					</SubAppInterfaceList>
+					<Attribute Name="width" Type="LREAL" Value="1333.3333333333335"/>
+					<Attribute Name="height" Type="LREAL" Value="666.6666666666667"/>
+				</SubApp>
+				<FB Name="VacuumGripper" Type="Vacuum" Comment="" x="7273.333333333334" y="1453.3333333333335">
+					<Parameter Name="ProductType" Value="'FTSaug'"/>
+				</FB>
+				<EventConnections>
+					<Connection Source="START.COLD" Destination="INIT_FIO.INIT" Comment="" dx1="433.33333333333337"/>
+					<Connection Source="START.WARM" Destination="INIT_FIO.INIT" Comment="" dx1="433.33333333333337"/>
+					<Connection Source="Move_Request.REQ_Move" Destination="Hardware_Move_X.REQ_Move" Comment=""/>
+					<Connection Source="INIT_FIO.INITO" Destination="Hardware_Move_X.INIT" Comment=""/>
+					<Connection Source="Hardware_Move_X.Moved" Destination="Hardware_Move_Z.REQ_Move" Comment=""/>
+					<Connection Source="INIT_FIO.INITO" Destination="Hardware_Move_Z.INIT" Comment=""/>
+					<Connection Source="INIT_FIO.INITO" Destination="VacuumGripper.INIT" Comment=""/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="Move_Request.Move_Destination" Destination="Hardware_Move_X.Move_Destination" Comment=""/>
+					<Connection Source="Move_Request.Move_Destination" Destination="Hardware_Move_Z.Move_Destination" Comment=""/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Mapping From="ETFA2023App.INIT_FIO" To="FORTE_PC.EMB_RES.INIT_FIO"/>
+	<Mapping From="ETFA2023App.Move_Request" To="FORTE_PC.EMB_RES.Move_Request"/>
+	<Mapping From="ETFA2023App.Hardware_Move_X" To="FORTE_PC.EMB_RES.Hardware_Move_X"/>
+	<Mapping From="ETFA2023App.Hardware_Move_Z" To="FORTE_PC.EMB_RES.Hardware_Move_Z"/>
+	<Mapping From="ETFA2023App.VacuumGripper" To="FORTE_PC.EMB_RES.VacuumGripper"/>
+</System>

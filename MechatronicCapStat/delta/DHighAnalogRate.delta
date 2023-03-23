@@ -1,0 +1,6 @@
+delta DHighAnalogRate;
+uses ETFA2023App.Hardware_Move_X.Sensor;
+
+{
+	<Modify> Variable name=RateSampler.DT value=T#200;
+}

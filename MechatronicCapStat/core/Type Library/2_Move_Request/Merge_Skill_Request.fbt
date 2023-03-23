@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="Merge_Skill_Request" Comment="Basic FB with empty ECC">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-02-20">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="Move_Work" Type="Event" Comment="">
+				<With Var="Data"/>
+			</Event>
+			<Event Name="Move_Home" Type="Event" Comment="">
+				<With Var="Data"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="HW_Request" Type="Event" Comment="">
+				<With Var="Requested_Data"/>
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="Data" Type="STRING" Comment="WorkOrHome"/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="Requested_Data" Type="STRING" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="547.8260869565217" y="421.73913043478257">
+			</ECState>
+			<ECState Name="State" Comment="" x="2608.695652173913" y="582.6086956521739">
+				<ECAction Algorithm="ALG_Home" Output="HW_Request"/>
+			</ECState>
+			<ECState Name="State_1" Comment="" x="2539.1304347826085" y="1473.9130434782608">
+				<ECAction Algorithm="ALG_Work" Output="HW_Request"/>
+			</ECState>
+			<ECTransition Source="START" Destination="State" Condition="Move_Home" Comment="" x="1695.6521739130435" y="800.0"/>
+			<ECTransition Source="START" Destination="State_1" Condition="Move_Work" Comment="" x="1647.8260869565217" y="1047.8260869565217"/>
+			<ECTransition Source="State_1" Destination="START" Condition="1" Comment="" x="982.6086956521739" y="1452.1739130434783"/>
+			<ECTransition Source="State" Destination="START" Condition="1" Comment="" x="1469.5652173913043" y="256.52173913043475"/>
+		</ECC>
+		<Algorithm Name="ALG_Home" Comment="">
+			<ST><![CDATA[Requested_Data:='Home';]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Work" Comment="">
+			<ST><![CDATA[Requested_Data:='Work';]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>

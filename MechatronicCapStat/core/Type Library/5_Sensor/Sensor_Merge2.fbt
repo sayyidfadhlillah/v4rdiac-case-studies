@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="Sensor_Merge2" Comment="Basic FB with empty ECC">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="AK125171" Date="2023-03-02">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="Sensor_Home_R" Type="Event" Comment="">
+			</Event>
+			<Event Name="Sensor_Home_F" Type="Event" Comment="">
+			</Event>
+			<Event Name="Sensor_Work_R" Type="Event" Comment="">
+			</Event>
+			<Event Name="Sensor_Work_F" Type="Event" Comment="">
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="Sensor_Update" Type="Event" Comment="">
+				<With Var="CNF_Home"/>
+				<With Var="CNF_Work"/>
+			</Event>
+		</EventOutputs>
+		<OutputVars>
+			<VarDeclaration Name="CNF_Home" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="CNF_Work" Type="BOOL" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="543.4782608695652" y="417.39130434782606">
+			</ECState>
+			<ECState Name="Sensor_Update_Arrived_Home" Comment="" x="3900.0" y="752.1739130434783">
+				<ECAction Algorithm="ALG_Home_R" Output="Sensor_Update"/>
+			</ECState>
+			<ECState Name="Sensor_Update_Arrived_Work" Comment="" x="3847.8260869565215" y="1582.6086956521738">
+				<ECAction Algorithm="ALG_Work_R" Output="Sensor_Update"/>
+			</ECState>
+			<ECState Name="Sensor_Update_Left_Home" Comment="" x="4026.086956521739" y="2534.782608695652">
+				<ECAction Algorithm="ALG_Home_F" Output="Sensor_Update"/>
+			</ECState>
+			<ECState Name="Sensor_Update_Left_Work" Comment="" x="4056.5217391304345" y="3156.5217391304345">
+				<ECAction Algorithm="ALG_Work_F" Output="Sensor_Update"/>
+			</ECState>
+			<ECTransition Source="START" Destination="Sensor_Update_Arrived_Home" Condition="Sensor_Home_R" Comment="" x="2430.4347826086955" y="626.0869565217391"/>
+			<ECTransition Source="START" Destination="Sensor_Update_Arrived_Work" Condition="Sensor_Work_R" Comment="" x="2226.086956521739" y="1252.1739130434783"/>
+			<ECTransition Source="Sensor_Update_Arrived_Home" Destination="START" Condition="1" Comment="" x="2404.3478260869565" y="830.4347826086956"/>
+			<ECTransition Source="Sensor_Update_Arrived_Work" Destination="START" Condition="1" Comment="" x="2243.478260869565" y="1482.6086956521738"/>
+			<ECTransition Source="START" Destination="Sensor_Update_Left_Home" Condition="Sensor_Home_F" Comment="" x="1917.391304347826" y="1856.5217391304348"/>
+			<ECTransition Source="Sensor_Update_Left_Home" Destination="START" Condition="1" Comment="" x="1934.782608695652" y="2130.4347826086955"/>
+			<ECTransition Source="START" Destination="Sensor_Update_Left_Work" Condition="Sensor_Work_F" Comment="" x="1465.2173913043478" y="2782.608695652174"/>
+			<ECTransition Source="Sensor_Update_Left_Work" Destination="START" Condition="1" Comment="" x="1356.5217391304348" y="2921.7391304347825"/>
+		</ECC>
+		<Algorithm Name="ALG_Work_R" Comment="">
+			<ST><![CDATA[CNF_Work:=TRUE;
+CNF_Home:=FALSE;]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Home_R" Comment="">
+			<ST><![CDATA[CNF_Home:=TRUE;
+CNF_Work:=FALSE;
+]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Home_F" Comment="">
+			<ST><![CDATA[CNF_Home:=FALSE;
+CNF_Work:=FALSE;]]></ST>
+		</Algorithm>
+		<Algorithm Name="ALG_Work_F" Comment="">
+			<ST><![CDATA[CNF_Work:=FALSE;
+CNF_Home:=FALSE;]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>

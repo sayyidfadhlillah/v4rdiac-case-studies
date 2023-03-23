@@ -12,7 +12,7 @@ We show how our delta modeling approach can express control software variability
 
 The repository contains five use cases:
 
-- [Capping Station](cappingstation) by courtesy of Alois Zoitl in [his publication](https://ieeexplore.ieee.org/document/6622910)
+- [Capping Station](MechatronicCapStat) by courtesy of Alois Zoitl in [his publication](https://ieeexplore.ieee.org/document/6622910)
 - [Truck](TruckProdStruct) by courtesy of [Tu Prague](https://testbed-test.ciirc.cvut.cz)
 - [Shift fork](ShiftForkPL) by courtesy of our industry partner
 - [Rocker switch](RockerswitchPL) by courtesy of our industry partner

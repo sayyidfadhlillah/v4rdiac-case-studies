@@ -1,0 +1,12 @@
+productline MechatronicCapStat;
+variations CappingStation#XAxisSensor,CappingStation#XAxisSensor#DigitalSensor,CappingStation#XAxisSensor#AnalogSensor#HighSamplingRate,CappingStation#XAxisSensor#AnalogSensor,CappingStation#GripperType,CappingStation#GripperType#Magnetic,CappingStation#ZAxisSensor,CappingStation,CappingStation#XAxisSensor#AnalogSensor#LowSamplingRate,CappingStation#XAxisSensor#DigitalSensor#WorkPosition,CappingStation#XAxisSensor#DigitalSensor#HomePosition,CappingStation#GripperType#Vacuum;
+
+delta DMagnetic when CappingStation#GripperType#Magnetic;
+delta DRemoveDigitalHome when !CappingStation#XAxisSensor#DigitalSensor#HomePosition && CappingStation#XAxisSensor#DigitalSensor;
+delta DRemoveHSTransform when !CappingStation#XAxisSensor#DigitalSensor#HomePosition && CappingStation#XAxisSensor#DigitalSensor;
+delta DRemoveDigitalWork when !CappingStation#XAxisSensor#DigitalSensor#WorkPosition && CappingStation#XAxisSensor#DigitalSensor;
+delta DRemoveWSTransform when !CappingStation#XAxisSensor#DigitalSensor#WorkPosition && CappingStation#XAxisSensor#DigitalSensor;
+delta DAnalogSensor when CappingStation#XAxisSensor#AnalogSensor;
+delta DAnalogSensorSetup after DAnalogSensor when CappingStation#XAxisSensor#AnalogSensor;
+delta DHighAnalogRate when CappingStation#XAxisSensor#AnalogSensor#HighSamplingRate;
+delta DLowAnalogRate when CappingStation#XAxisSensor#AnalogSensor#HighSamplingRate;
