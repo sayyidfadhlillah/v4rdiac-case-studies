@@ -1,5 +1,5 @@
 delta DMagnetic;
-uses ETFA2023App;
+uses CappingStation;
 
 {
 	<Add> FB name=MagneticGripper type=Magnetic;

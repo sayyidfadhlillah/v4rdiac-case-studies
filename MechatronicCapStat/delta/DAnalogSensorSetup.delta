@@ -1,5 +1,5 @@
 delta DAnalogSensorSetup;
-uses ETFA2023App.Hardware_Move_X.Sensor.Sensor_Analog;
+uses CappingStation.Hardware_Move_X.Sensor.Sensor_Analog;
 
 {
 	<Add> FB name=OPC_SUB_1_FixID_INT type=OPC_SUB_1_FixID_INT;

@@ -1,5 +1,5 @@
 delta DRemoveDigitalWork;
-uses ETFA2023App.Hardware_Move_X.Sensor;
+uses CappingStation.Hardware_Move_X.Sensor;
 
 {
 	<Add> EventConnection source=Sensor_Digital_Home.INITO dest=INITO;

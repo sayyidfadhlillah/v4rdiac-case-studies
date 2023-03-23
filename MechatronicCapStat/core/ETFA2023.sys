@@ -2,7 +2,7 @@
 <System Name="ETFA2023" Comment="">
 	<VersionInfo Version="1.0" Author="AK125171" Date="2023-03-17">
 	</VersionInfo>
-	<Application Name="ETFA2023App" Comment="">
+	<Application Name="CappingStation" Comment="">
 		<SubAppNetwork>
 			<SubApp Name="INIT_FIO" Comment="" x="3466.666666666667" y="-1333.3333333333335">
 				<SubAppInterfaceList>

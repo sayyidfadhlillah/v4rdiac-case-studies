@@ -1,5 +1,5 @@
 delta DAnalogSensor;
-uses ETFA2023App.Hardware_Move_X.Sensor;
+uses CappingStation.Hardware_Move_X.Sensor;
 
 {	
 	<Create> Subapplication name=Sensor_Analog {
