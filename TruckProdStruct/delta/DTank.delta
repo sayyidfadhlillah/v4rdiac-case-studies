@@ -1,0 +1,8 @@
+delta DTank;
+uses TruckCaseStudyApp;
+
+{
+	<Remove> NetworkElement name=InsertTank;
+	<Remove> NetworkElement name=InstallTank;
+	<Remove> NetworkElement name=E_REND_Tank;
+}

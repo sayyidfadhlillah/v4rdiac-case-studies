@@ -1,0 +1,8 @@
+delta DStakeBed;
+uses TruckCaseStudyApp;
+
+{
+	<Remove> NetworkElement name=InsertStakeBed;
+	<Remove> NetworkElement name=InstallStakeBed;
+	<Remove> NetworkElement name=E_REND_StakeBed;
+}

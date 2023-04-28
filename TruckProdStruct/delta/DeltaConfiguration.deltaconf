@@ -1,18 +1,10 @@
 productline TruckProdStruct;
 variations truck_product,truck_product#Cabin,truck_product#Body#Dumper,truck_product#Body#StakeBed,truck_product#Body#Tank,truck_product#Body#OpenTop,truck_product#Chassis,truck_product#Body;
 
-delta DInstallOpenTop when truck_product#Body#OpenTop;
+delta DOpenTop when !truck_product#Body#OpenTop;
 
-delta DInstallDumper when truck_product#Body#Dumper;
+delta DDumper when !truck_product#Body#Dumper;
 
-delta DInstallStakeBed when truck_product#Body#StakeBed;
+delta DStakeBed when !truck_product#Body#StakeBed;
 
-delta DInstallTank when truck_product#Body#Tank;
-
-delta DInsertOpenTop when truck_product#Body#OpenTop;
-
-delta DInsertTank when truck_product#Body#Tank;
-
-delta DInsertDumper when truck_product#Body#Dumper;
-
-delta DInsertStakeBed when truck_product#Body#StakeBed;
+delta DTank when !truck_product#Body#Tank;

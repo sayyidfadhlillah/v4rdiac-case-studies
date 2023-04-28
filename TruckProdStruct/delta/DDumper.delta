@@ -1,0 +1,8 @@
+delta DDumper;
+uses TruckCaseStudyApp;
+
+{	
+	<Remove> NetworkElement name=InsertDumper;
+	<Remove> NetworkElement name=InstallDumper;
+	<Remove> NetworkElement name=E_REND_Dumper;
+}

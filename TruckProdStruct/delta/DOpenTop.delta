@@ -1,0 +1,8 @@
+delta DOpenTop;
+uses TruckCaseStudyApp;
+
+{
+	<Remove> NetworkElement name=InsertOpenTop;
+	<Remove> NetworkElement name=InstallOpenTop;
+	<Remove> NetworkElement name=E_REND_OpenTop;
+}
